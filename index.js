@@ -18,14 +18,14 @@ app.set("view engine", "ejs");
 // Home route 
 app.get("/", (req, res) => {
   res.render("index", { 
-    title: "My App",
     message: "Welcome! Edit me in views/index.ejs"
   });
 });
 
 // helper functions
 const handleResponse = (res, responseObj) => {
-  res.render("index", { content: JSON.stringify(responseObj.data) });
+  console.log(responseObj.data);
+  // res.render("index", { content: JSON.stringify(responseObj.data) });
 };
 
 const handleError = (res, error) => {
@@ -34,9 +34,12 @@ const handleError = (res, error) => {
 };
 
 // basic server GET route 
-app.get("/random", async (req, res) => {
+app.post("/search", async (req, res) => {
+  const countryName = req.body.countryName;
+  console.log(`Searching for country: ${countryName}`);
+
   try {
-    const responseObj = await axios.get(`${API_URL}/endpoint`);
+    const responseObj = await axios.get(`${API_URL}${nameEndpoint(countryName)}${endpointFields}`);
     handleResponse(res, responseObj);
   } catch (error) {
     handleError(res, error);

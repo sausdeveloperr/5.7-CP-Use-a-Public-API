@@ -1,5 +1,40 @@
 /* public/css/input.css */
 
+/* Import Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=DM+Sans:opsz,wght@9..40,300&display=swap');
+
+/* custom CSS variables for preferred color scheme */
+@layer base {
+  :root {
+    --color-bg: #ffffff;
+    --color-text: #000000;
+    --color-accent: #3b82f6;
+    --color-border: #e5e7eb;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --color-bg: #111827; 
+      --color-text: #f9fafb;
+      --color-accent: #60a5fa;
+      --color-border: #374151;
+    }
+  }
+
+  body {
+    font-family: "DM Sans", -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: "Poppins", sans-serif;
+      font-weight: 400;
+  font-style: normal;
+  }
+
+  .pest {
+    border: 2px solid red;
+  }
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
