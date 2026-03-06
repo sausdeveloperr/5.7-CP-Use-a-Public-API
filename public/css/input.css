@@ -33,6 +33,10 @@
   .pest {
     border: 2px solid red;
   }
+
+  .pest-or {
+    border: 2px solid orange;
+  }
 }
 
 @tailwind base;

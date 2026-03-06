@@ -1,5 +1,6 @@
 # local test data (not part of repo)
 test-api-res.json
+public/images
 
 # dependencies
 node_modules/
