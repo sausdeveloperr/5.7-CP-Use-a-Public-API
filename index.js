@@ -4,9 +4,9 @@ import axios from "axios";
 const app = express();
 const port = 3000; 
 const API_URL = "https://restcountries.com/v3.1";
-const nameEndpoint = (countryName) => `/name/${countryName}`;
-const endpointFields = "?fields=name,capital,region,subregion,population,car,timezones,currencies,languages,flags,demonyms,startofweek,unmember,idd,landlocked";
+const nameEndpoint = (countryName) => `/name/${encodeURIComponent(countryName)}`;
 // const otherEndpoints = "blablabla"
+const endpointFields = "?fields=name,capital,region,subregion,population,car,timezones,currencies,languages,flags,demonyms,startofweek,unmember,idd,landlocked";
 
 // Middleware
 app.use(express.static("public"));           
@@ -17,9 +17,7 @@ app.set("view engine", "ejs");
 
 // Home route 
 app.get("/", (req, res) => {
-  res.render("index", { 
-    message: "Welcome! Edit me in views/index.ejs"
-  });
+  res.render("index", { content: null });
 });
 
 // helper functions
@@ -33,9 +31,9 @@ const handleError = (res, error) => {
   res.status(500).render("index", { message: "An error occurred. Please try again." });
 };
 
-// basic server GET route 
+// fetch country data
 app.post("/search", async (req, res) => {
-  const countryName = req.body.countryName;
+  const countryName = req.body.countryName.trim();
   console.log(`Searching for country: ${countryName}`);
 
   try {
