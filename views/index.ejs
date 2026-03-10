@@ -69,6 +69,7 @@
   </div>
 
   <!-- Main content area (for results) -->
+   <!-- TODO: make div.max-w-3xl.mx-auto below flex/grid in V2 to show results in a more compact way (e.g., mb: 1, md: 2-3 cards per row) -->
   <div id="mainContent" role="main" class="pest-or px-4 py-8" aria-live="polite" aria-label="Search results area">
     <!-- Results will go here -->
     <% if (locals.content) { %>
@@ -77,7 +78,7 @@
           const countries = typeof content === 'string' ? JSON.parse(content) : content;
           if (Array.isArray(countries) && countries.length > 0) {
       %>
-        <div class="max-w-2xl mx-auto">
+        <div class="max-w-3xl mx-auto">
           <% countries.forEach(country => { %>
             <%- include('partials/countryCard', { country }) %>
           <% }); %>
@@ -90,8 +91,8 @@
         </div>
       <% 
           }
-        } catch (e) {
-          console.error('Error parsing country data:', e);
+        } catch (err) {
+          console.error('Error parsing country data:', err);
       %>
         <div class="max-w-2xl mx-auto bg-red-50 dark:bg-gray-800 border border-red-200 dark:border-gray-700 rounded-2xl p-6 text-center">
           <p class="text-red-700 dark:text-red-400 font-semibold">Error loading country data. Please try again.</p>

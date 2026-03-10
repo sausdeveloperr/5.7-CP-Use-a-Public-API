@@ -1,15 +1,16 @@
-<!-- filepath: c:\Users\HP-PC\Documents\Salami Olamilekan\MERN\JS\Backend\5.7 CP Use a Public API\views\partials\countryCard.ejs -->
+
+<!-- TODO: remove article.w-full class in V2 so its width is determined by flex/grid of parent div.max-w-3xl.mx-auto -->
 <article class="bg-white dark:bg-gray-800 rounded-3xl shadow-lg dark:shadow-gray-950 border border-gray-200 dark:border-gray-700 overflow-hidden transition-all duration-300">
   <!-- Main card content -->
   <div class="p-6 md:p-8">
     <!-- Flag and header section -->
-    <div class="flex gap-6 mb-8">
+    <div class="flex flex-col md:flex-row gap-6 mb-8">
       <!-- Flag image -->
-      <div class="flex-shrink-0">
-        <figure class="w-32 h-24 rounded-2xl overflow-hidden border-2 border-gray-300 dark:border-gray-600 bg-gradient-to-br from-gray-300 to-gray-400 dark:from-gray-700 dark:to-gray-600">
+      <div class="w-full md:w-[50%] flex-shrink-0">
+        <figure class="w-full h-48 md:h-64 rounded-2xl overflow-hidden border-2 border-gray-300 dark:border-gray-600 bg-gradient-to-br from-gray-300 to-gray-400 dark:from-gray-700 dark:to-gray-600">
           <img 
-            src="<%= country.flags.png %>" 
-            alt="<%= country.flags.alt %>"
+            src="<%= country.flags.svg %>" 
+            alt="<%= country.flags.alt || 'Flag of ' + country.name.common %>"
             class="w-full h-full object-cover animate-pulse"
             loading="lazy"
             onload="this.classList.remove('animate-pulse')"
@@ -18,19 +19,17 @@
       </div>
 
       <!-- Country info section -->
-      <div class="flex-1">
-        <!-- Name info -->
+      <div class="w-full md:w-[50%]">
         <div class="mb-6">
-          <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-1">
+          <h2 class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-1">
             <%= country.name.common %>
           </h2>
-          <p class="text-sm text-gray-600 dark:text-gray-400 font-medium">
+          <p class="text-sm md:text-base text-gray-600 dark:text-gray-400 font-medium">
             <%= country.name.official %>
           </p>
         </div>
 
-        <!-- Capital and locations -->
-        <div class="grid grid-cols-2 gap-4 text-sm">
+        <div class="grid grid-cols-2 gap-6 text-sm">
           <div>
             <p class="text-gray-500 dark:text-gray-400 text-xs uppercase font-semibold mb-1 flex items-center gap-1">
               <span class="material-icons text-base">location_city</span> Capital
@@ -44,7 +43,7 @@
               <span class="material-icons text-base">public</span> Region
             </p>
             <p class="text-gray-900 dark:text-gray-100 font-semibold">
-              <%= country.region %>
+              <%= country.region || 'N/A' %>
             </p>
           </div>
           <div>
@@ -52,7 +51,7 @@
               <span class="material-icons text-base">map</span> Subregion
             </p>
             <p class="text-gray-900 dark:text-gray-100 font-semibold">
-              <%= country.subregion %>
+              <%= country.subregion || 'N/A' %>
             </p>
           </div>
           <div>
@@ -60,7 +59,7 @@
               <span class="material-icons text-base">people</span> Demonym
             </p>
             <p class="text-gray-900 dark:text-gray-100 font-semibold">
-              <%= country.demonyms?.eng?.m || 'N/A' %>
+              <%= country.demonyms?.eng?.m || country.demonyms?.eng?.f || 'N/A' %>
             </p>
           </div>
         </div>
@@ -68,7 +67,7 @@
     </div>
 
     <!-- Quick stats -->
-    <div class="grid grid-cols-2 gap-4 mb-8 pb-8 border-b border-gray-200 dark:border-gray-700">
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mb-8 pb-8 border-b border-gray-200 dark:border-gray-700">
       <div class="flex items-start gap-3">
         <span class="material-icons text-blue-500 dark:text-blue-400 flex-shrink-0 mt-1">people</span>
         <div>
@@ -83,7 +82,7 @@
         <div>
           <p class="text-xs text-gray-500 dark:text-gray-400 uppercase font-semibold">Dial Code</p>
           <p class="text-lg font-bold text-gray-900 dark:text-white">
-            +<%= country.idd.root %><%= country.idd.suffixes ? country.idd.suffixes[0] : '' %>
+            <%= country.idd.root %><%= country.idd.suffixes ? country.idd.suffixes[0] : '' %>
           </p>
         </div>
       </div>
@@ -109,40 +108,42 @@
       </div>
     </div>
 
-    <!-- Auxiliary details toggle button -->
-    <button 
-      id="toggleAuxiliary" 
-      type="button"
-      aria-expanded="false"
-      aria-controls="auxiliaryDetails"
-      class="w-full py-3 px-4 flex items-center justify-between bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 rounded-2xl border border-gray-300 dark:border-gray-600 transition-all duration-200 group"
-    >
-      <span class="font-semibold text-gray-900 dark:text-white flex items-center gap-2">
-        <span class="material-icons text-lg">info</span>
-        Auxiliary Details
-      </span>
-      <span class="material-icons text-gray-600 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white transition-transform duration-300" id="toggleIcon">expand_more</span>
-    </button>
+    <!-- Buttons wrapper with consistent padding -->
+    <div class="space-y-4">
+      <!-- Auxiliary toggle button -->
+      <button 
+        id="toggleAuxiliary" 
+        type="button"
+        aria-expanded="false"
+        aria-controls="auxiliaryDetails"
+        class="w-full py-3 px-6 flex items-center justify-between bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 rounded-2xl border border-gray-300 dark:border-gray-600 transition-all duration-200 group"
+      >
+        <span class="font-semibold text-gray-900 dark:text-white flex items-center gap-2">
+          <span class="material-icons text-lg">info</span>
+          Auxiliary Details
+        </span>
+        <span class="material-icons text-gray-600 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white transition-transform duration-300" id="toggleIcon">expand_more</span>
+      </button>
 
-    <!-- add an accented disabled button below this that says "What's happening in this country?" and leads to another page -->
-
-    <button 
-      type="button"
-      aria-label="What's happening in this country"
-      title="Feature coming soon!"
-      class="w-full px-3 md:px-4 py-1 md:py-1.5 mt-6 bg-blue-500 hover:scale-105 active:bg-blue-700 active:scale-95 dark:bg-blue-600 dark:hover:bg-blue-500 dark:active:bg-blue-700 text-white font-semibold rounded-2xl flex items-center justify-center gap-2 transition-all duration-200 hover:shadow-lg active:shadow-md focus:outline-none focus:ring-2 focus:ring-blue-400 dark:focus:ring-blue-500 focus:ring-offset-2 dark:focus:ring-offset-gray-900 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
-      style="background-color: var(--color-accent);"
-      disabled
-    >
-      <span class="material-icons text-lg md:text-xl">newspaper</span>
-      <span>What's happening in this country?</span>
-    </button>
+      <!-- What's happening button -->
+      <button 
+        type="button"
+        aria-label="What's happening in this country"
+        title="Feature coming soon!"
+        class="w-full px-6 py-3 bg-blue-500 hover:scale-105 active:bg-blue-700 active:scale-95 dark:bg-blue-600 dark:hover:bg-blue-500 dark:active:bg-blue-700 text-white font-semibold rounded-2xl flex items-center justify-center gap-2 transition-all duration-200 hover:shadow-lg active:shadow-md focus:outline-none focus:ring-2 focus:ring-blue-400 dark:focus:ring-blue-500 focus:ring-offset-2 dark:focus:ring-offset-gray-900 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
+        style="background-color: var(--color-accent);"
+        disabled
+      >
+        <span class="material-icons text-lg md:text-xl hidden md:block">newspaper</span>
+        <span>What's happening in this country?</span>
+      </button>
+    </div>
   </div>
 
-  <!-- Auxiliary details section (collapsed by default) -->
+  <!-- Auxiliary details section (collapsed) -->
   <div 
     id="auxiliaryDetails"
-    class="hidden max-h-0 overflow-hidden transition-all duration-300"
+    class="hidden max-h-0 overflow-hidden transition-all duration-300 ease-in-out"
   >
     <div class="p-6 md:p-8 bg-gray-50 dark:bg-gray-900 border-t border-gray-200 dark:border-gray-700">
       <!-- Timezones -->
