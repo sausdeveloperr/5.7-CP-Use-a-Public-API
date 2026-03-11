@@ -108,8 +108,8 @@ const handleError = (res, error) => {
 // fetch country data
 app.post("/search", async (req, res) => {
   // TODOs
-// - Handle edge cases (e.g., empty input(already handled by FE reuired attr), 
-// typing NGA, RSA, USA, UK, england and similar cases instead of Nigeria, South Africa, United States)
+// - Handle edge cases (e.g., empty input(already handled by FE required attr).
+// - In V2: typing NGA, RSA, USA, UK, england and similar cases instead of Nigeria, South Africa, United States)
 
   const countryName = req.body.countryName.trim();
 

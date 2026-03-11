@@ -31,15 +31,15 @@
   }
 
   .pest {
-    border: 3px solid red;
+    border: 2px solid red;
   }
 
   .pest-or {
-    border: 3px solid orange;
+    border: 2px solid orange;
   }
 
   .pest-bl {
-    border: 5px solid blue;
+    border: 3px solid blue;
   }
 }
 

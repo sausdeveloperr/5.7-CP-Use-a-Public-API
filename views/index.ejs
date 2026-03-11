@@ -70,7 +70,8 @@
 
   <!-- Main content area (for results) -->
    <!-- TODO: make div.max-w-3xl.mx-auto below flex/grid in V2 to show results in a more compact way (e.g., mb: 1, md: 2-3 cards per row) -->
-  <div id="mainContent" role="main" class="pest-or px-4 py-8" aria-live="polite" aria-label="Search results area">
+   <!-- TODO: Still undecided - In V2, add an else if (Array.isArray(countries) && countries.length > 1) that render multiple cards via altCountryCard.ejs -->
+  <div id="mainContent" role="main" class="px-4 py-8" aria-live="polite" aria-label="Search results area">
     <!-- Results will go here -->
     <% if (locals.content) { %>
       <% 
