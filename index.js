@@ -19,97 +19,27 @@ app.get("/", (req, res) => {
 });
 
 // helper functions
-const errTestObject = {
-        "flags": {
-            "png": "https://flagcdn.com/w320/rw.png",
-            "svg": "https://flagcdn.com/rw.svg",
-            "alt": "The flag of Rwanda is composed of three horizontal bands of light blue, yellow and green. The light blue band is twice the height of the other two bands and bears a yellow sun with twenty-four rays on its fly side."
-        },
-        "name": {
-            "common": "Rwanda",
-            "official": "Republic of Rwanda",
-            "nativeName": {
-                "eng": {
-                    "official": "Republic of Rwanda",
-                    "common": "Rwanda"
-                },
-                "fra": {
-                    "official": "République rwandaise",
-                    "common": "Rwanda"
-                },
-                "kin": {
-                    "official": "Repubulika y'u Rwanda",
-                    "common": "Rwanda"
-                }
-            }
-        },
-        "currencies": {
-            "RWF": {
-                "name": "Rwandan franc",
-                "symbol": "Fr"
-            }
-        },
-        "languages": {
-            "eng": "English",
-            "fra": "French",
-            "kin": "Kinyarwanda"
-        },
-        "demonyms": {
-            "eng": {
-                "f": "Rwandan",
-                "m": "Rwandan"
-            },
-            "fra": {
-                "f": "Rwandaise",
-                "m": "Rwandais"
-            }
-        },
-        "idd": {
-            "root": "+2",
-            "suffixes": [
-                "50"
-            ]
-        },
-        "capital": [
-            "Kigali"
-        ],
-        "region": "Africa",
-        "subregion": "Eastern Africa",
-        "landlocked": true,
-        "population": 14104969,
-        "car": {
-            "signs": [
-                "RWA"
-            ],
-            "side": "right"
-        },
-        "timezones": [
-            "UTC+02:00"
-        ]
-    };
-
 const handleResponse = (res, responseObj) => {
-  // console.log(responseObj.data);
   res.render("index", { content: responseObj.data }); 
-  // res.render("index", { content: JSON.parse(errTestObject) }); 
-  // res.render("index", { content: JSON.stringify(responseObj.data) });
 };
 
 const handleError = (res, error) => {
   if (error.response && error.response.status === 404) {
     console.error("API Error:", error.response.data);
-    res.status(404).render("index", { content: "Country not found. Please type it correctly or fully." });
+    res.status(404).render("index", { content: "Country not found. Try a different spelling." });
   } else {
     console.error("API Error:", error);
     res.status(500).render("index", { content: "An error occurred. Please try again." });
   }
 };
 
-// fetch country data
-app.post("/search", async (req, res) => {
-  // TODOs
-// - Handle edge cases (e.g., empty input(already handled by FE required attr).
+// TODOs
+// - ✅ Handle edge cases (e.g., empty input(already handled by FE required attr).
 // - In V2: typing NGA, RSA, USA, UK, england and similar cases instead of Nigeria, South Africa, United States)
+// - In V2: use selected filter in frontend form to reroute from /name endpoint to other endpoints (e.g., /capital, /currency, /lang etc) for more specific search results. This will require some changes to the FE form (e.g., adding a dropdown for filter selection) and the BE route handler (e.g., using a switch case to determine which endpoint to call based on the selected filter). countryName become searchQuery
+
+// fetch country data
+app.post("/search", async (req, res) => {  
 
   const countryName = req.body.countryName.trim();
 
