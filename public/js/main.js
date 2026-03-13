@@ -12,7 +12,9 @@ document.addEventListener('DOMContentLoaded', () => {
   if (!toggleButton || !auxiliaryDetails) return;
 
   toggleButton.addEventListener('click', () => {
-    const isExpanded = toggleButton.getAttribute('aria-expanded') === 'true';
+    const isExpanded = (toggleButton.getAttribute('aria-expanded') === 'true');
+    // OR
+    // const isExpanded = (toggleButton.getAttribute('aria-expanded') === 'true') ? true : false; 
     
     toggleButton.setAttribute('aria-expanded', !isExpanded);
     auxiliaryDetails.classList.toggle('hidden');
@@ -20,6 +22,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Smooth height animation
     if (!isExpanded) {
       auxiliaryDetails.style.maxHeight = auxiliaryDetails.scrollHeight + 'px';
+      // scrollHeight - predefined method returns total height of an element, including overflow-hidden content
       toggleIcon.style.transform = 'rotate(180deg)';
     } else {
       auxiliaryDetails.style.maxHeight = '0';

@@ -6,7 +6,7 @@ const port = 3000;
 const API_URL = "https://restcountries.com/v3.1";
 const nameEndpoint = (countryName) => `/name/${encodeURIComponent(countryName)}?fullText=true`;
 // const otherEndpoints = "blablabla"
-const endpointFields = "&fields=name,capital,region,subregion,population,car,timezones,currencies,languages,flags,demonyms,startOfWeek,unmember,idd,landlocked";
+const endpointFields = "&fields=name,capital,region,subregion,population,car,timezones,currencies,languages,flags,demonyms,startOfWeek,unMember,idd,landlocked";
 
 //app config
 app.use(express.static("public"));           
