@@ -4,6 +4,31 @@
 // TODOs
 // - Add loading state for the search button (e.g., show a FE spinner in #mainContent while waiting for the API response)
 
+// input field dropdown menu
+document.addEventListener('DOMContentLoaded', () => {
+  const input = document.getElementById('countryInput');
+  const select = document.getElementById('searchType');
+
+  const placeholders = {
+    name:     "Enter country name...",
+    alpha:    "Enter code (e.g. USA, NGA, BRA)...",
+    capital:  "Enter capital city...",
+    region:   "Enter region (e.g. Africa, Europe)...",
+    currency: "Enter currency code (e.g. USD, NGN)...",
+    language: "Enter language (e.g. English, Spanish)...",
+    demonym:  "Enter demonym (e.g. Nigerian, French)..."
+  };
+
+  select.addEventListener('change', () => {
+    const type = select.value;
+    input.placeholder = placeholders[type] || "Enter search term...";
+    
+    // Optional: clear input when changing type
+    // input.value = '';
+  });
+});
+
+// Toggle auxiliary details (e.g., demonyms, timezones, etc) in the search results
 document.addEventListener('DOMContentLoaded', () => {
   const toggleButton = document.getElementById('toggleAuxiliary');
   const auxiliaryDetails = document.getElementById('auxiliaryDetails');
@@ -30,5 +55,3 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 });
-
-

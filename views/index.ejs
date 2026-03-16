@@ -7,7 +7,6 @@
   <title>Country Info app</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
   <link rel="stylesheet" href="/css/output.css">
-  <!-- <link rel="icon" href="/images/favicon.ico" /> -->
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><text y='14' font-size='16'>🌍</text></svg>">
 </head>
 
@@ -42,15 +41,56 @@
       <section class=" my-3 md:my-5">
         <form id="countrySearchForm" method="POST" action="/search" class=" flex flex-col gap-4 md:flex-row md:gap-3">
           <!-- Search input -->
-          <div class="flex-1">
-            <label for="countryInput" class="sr-only">Enter country name</label> 
-            <!-- make label & placeholder text change based on selected filter in V2 -->
-            <input type="text" id="countryInput" name="countryName" placeholder="Enter country name..."
-              aria-label="Search for a country" aria-describedby="searchHint"
-              class="w-full px-4 md:px-6 py-3 md:py-4 rounded-2xl border-2 border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 placeholder-gray-500 dark:placeholder-gray-400 focus:outline-none focus:border-blue-500 dark:focus:border-blue-400 focus:ring-2 focus:ring-blue-200 dark:focus:ring-blue-900 transition-all duration-200 text-base md:text-lg"
-              required />
-              <div id="searchHint" class="sr-only">Type the name of a country and press the search button to find information about it.</div>
+          <div class="flex-1 relative">
+            <label for="countryInput" class="sr-only">Search for a country</label>
+            
+            <div class="relative flex items-center">
+              <!-- Input with dropdown overlay -->
+              <input 
+                type="text" 
+                id="countryInput" 
+                name="searchField" 
+                placeholder="Enter country name..." 
+                aria-label="Search for a country" 
+                aria-describedby="searchHint"
+                class="w-full px-4 md:px-6 py-3 md:py-4 pr-32 rounded-2xl border-2 border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 placeholder-gray-500 dark:placeholder-gray-400 focus:outline-none focus:border-blue-500 dark:focus:border-blue-400 focus:ring-2 focus:ring-blue-200 dark:focus:ring-blue-900 transition-all duration-200 text-base md:text-lg"
+                required 
+              />
+              
+              <!-- Dropdown (positioned inside input, right side) -->
+              <select
+                id="searchType"
+                class="absolute right-2 top-1/2 -translate-y-1/2 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 border border-gray-400 dark:border-gray-600 rounded-xl px-3 py-1.5 text-sm font-medium focus:outline-none focus:border-blue-500 dark:focus:border-blue-400 focus:ring-2 focus:ring-blue-200 dark:focus:ring-blue-900 cursor-pointer appearance-none"
+              >
+                <option value="name" selected>Name</option>
+                <option value="alpha">Alpha Code</option>
+                <option value="capital">Capital</option>
+                <option value="region">Region</option>
+                <option value="currency">Currency</option>
+                <option value="language">Language</option>
+                <option value="demonym">Demonym</option>
+              </select>
+            </div>
+
+            <div id="searchHint" class="sr-only text-sm text-gray-500 dark:text-gray-400 mt-2">
+              Type and select search type above
+            </div>
           </div>
+
+          <!-- consider this for autocomplete -->
+           <!-- 
+          <label for="icecream-choice">Choose a flavor:</label>
+          <input list="icecream-flavors" id="icecream-choice" name="icecream-choice" />
+
+          <datalist id="icecream-flavors">
+              <option value="Chocolate">
+              <option value="Coconut">
+              <option value="Mint">
+              <option value="Strawberry">
+              <option value="Vanilla">
+          </datalist>
+          The list attribute of the <input> element must reference the id of the <datalist> element.
+           -->
 
           <!-- Search button -->
            <!-- Add loading state for this in main.js once button is clicked (e.g., show a FE spinner in #mainContent while waiting for the API response)  -->
