@@ -36,7 +36,11 @@ const handleError = (res, error) => {
 // TODOs
 // - ✅ Handle edge cases (e.g., empty input(already handled by FE required attr).
 // - In V2: typing NGA, RSA, USA, UK, england and similar cases instead of Nigeria, South Africa, United States)
-// - In V2: use selected filter in frontend form to reroute from /name endpoint to other endpoints (e.g., /capital, /currency, /lang etc) for more specific search results. This will require some changes to the FE form (e.g., adding a dropdown for filter selection) and the BE route handler (e.g., using a switch case to determine which endpoint to call based on the selected filter). countryName become searchQuery
+// - In V2: use selected filter in frontend form to reroute from /name endpoint to other endpoints 
+// (e.g., /capital, /currency, /lang etc) for more specific search results. This will require some 
+// changes to the FE form (e.g., adding a dropdown for filter selection) and the BE route handler 
+// (e.g., using a switch case to determine which endpoint to call based on the selected filter). 
+// countryName becomes searchQuery
 
 // fetch country data
 app.post("/search", async (req, res) => {  
