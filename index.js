@@ -4,9 +4,7 @@ import axios from "axios";
 const app = express();
 const port = 3000; 
 const API_URL = "https://restcountries.com/v3.1";
-const nameEndpoint = (countryName) => `/name/${encodeURIComponent(countryName)}?fullText=true`;
-// const otherEndpoints = "blablabla"
-const endpointFields = "&fields=name,capital,region,subregion,population,car,timezones,currencies,languages,flags,demonyms,startOfWeek,unMember,idd,landlocked";
+const endpointFields = "fields=name,capital,region,subregion,population,car,timezones,currencies,languages,flags,demonyms,startOfWeek,unMember,idd,landlocked";
 
 //app config
 app.use(express.static("public"));           
@@ -20,7 +18,11 @@ app.get("/", (req, res) => {
 
 // helper functions
 const handleResponse = (res, responseObj) => {
-  res.render("index", { content: responseObj.data }); 
+  const data = Array.isArray(responseObj.data) 
+    ? responseObj.data 
+    : [responseObj.data];   // ← wrap single object in array
+
+  res.render("index", { content: data });
 };
 
 const handleError = (res, error) => {
@@ -44,15 +46,31 @@ const handleError = (res, error) => {
 
 // fetch country data
 app.post("/search", async (req, res) => {  
-
-  // const countryName = req.body.countryName.trim();
   console.log(req.body);
   
-  const countryName = req.body.searchInput.trim(); 
+  const { searchInput, searchType } = req.body;
+  const query = searchInput.trim();
+
+  let endpoint = '';
+  switch(searchType) {
+    case 'name':     endpoint = `/name/${encodeURIComponent(query)}?fullText=true&`; break;
+    case 'alpha':    endpoint = `/alpha/${query.toUpperCase()}?`; break; /* TODO: fix uppercase malfunction */
+    case 'capital':  endpoint = `/capital/${encodeURIComponent(query)}`; break;
+    
+    case 'region': endpoint = `/region/${encodeURIComponent(query)}`; break;
+    case 'currency': endpoint = `/currency/${encodeURIComponent(query)}`; break;
+    case 'language': endpoint = `/lang/${encodeURIComponent(query)}`; break;
+    case 'demonym':  endpoint = `/demonym/${encodeURIComponent(query)}`; break;
+    default: 
+      res.status(400).render("index", { content: "Invalid search type." });
+      return;
+    // ... etc.
+  }
 
   try {
-    console.log(`${API_URL}${nameEndpoint(countryName)}${endpointFields}`);
-    const responseObj = await axios.get(`${API_URL}${nameEndpoint(countryName)}${endpointFields}`);
+    console.log(`${API_URL}${endpoint}${endpointFields}`);
+    const responseObj = await axios.get(`${API_URL}${endpoint}${endpointFields}`);
+    
     handleResponse(res, responseObj);
   } catch (error) {
     handleError(res, error);
