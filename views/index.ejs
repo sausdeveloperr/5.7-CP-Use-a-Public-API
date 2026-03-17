@@ -42,14 +42,14 @@
         <form id="countrySearchForm" method="POST" action="/search" class=" flex flex-col gap-4 md:flex-row md:gap-3">
           <!-- Search input -->
           <div class="flex-1 relative">
-            <label for="countryInput" class="sr-only">Search for a country</label>
-            
+            <!-- input field -->
+            <label for="searchInput" class="sr-only">Search for a country</label>
             <div class="relative flex items-center">
               <!-- Input with dropdown overlay -->
               <input 
                 type="text" 
-                id="countryInput" 
-                name="searchField" 
+                id="searchInput" 
+                name="searchInput" 
                 placeholder="Enter country name..." 
                 aria-label="Search for a country" 
                 aria-describedby="searchHint"
@@ -57,10 +57,11 @@
                 required 
               />
               
-              <!-- Dropdown (positioned inside input, right side) -->
+              <!-- Dropdown overlay -->
               <select
                 id="searchType"
-                class="absolute right-2 top-1/2 -translate-y-1/2 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 border border-gray-400 dark:border-gray-600 rounded-xl px-3 py-1.5 text-sm font-medium focus:outline-none focus:border-blue-500 dark:focus:border-blue-400 focus:ring-2 focus:ring-blue-200 dark:focus:ring-blue-900 cursor-pointer appearance-none"
+                name="searchType"
+                class="absolute right-2 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 border border-gray-400 dark:border-gray-600 rounded-xl px-3 py-1.5 text-sm font-medium focus:outline-none focus:border-blue-500 dark:focus:border-blue-400 focus:ring-2 focus:ring-blue-200 dark:focus:ring-blue-900 cursor-pointer appearance-none"
               >
                 <option value="name" selected>Name</option>
                 <option value="alpha">Alpha Code</option>
@@ -73,7 +74,7 @@
             </div>
 
             <div id="searchHint" class="sr-only text-sm text-gray-500 dark:text-gray-400 mt-2">
-              Type and select search type above
+              Type query and select search type above
             </div>
           </div>
 

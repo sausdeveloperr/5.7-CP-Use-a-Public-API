@@ -6,7 +6,8 @@
 
 // input field dropdown menu
 document.addEventListener('DOMContentLoaded', () => {
-  const input = document.getElementById('countryInput');
+  // contextual placeholders
+  const input = document.getElementById('searchInput');
   const select = document.getElementById('searchType');
 
   const placeholders = {
@@ -26,10 +27,9 @@ document.addEventListener('DOMContentLoaded', () => {
     // Optional: clear input when changing type
     // input.value = '';
   });
-});
 
-// Toggle auxiliary details (e.g., demonyms, timezones, etc) in the search results
-document.addEventListener('DOMContentLoaded', () => {
+
+  // Toggle auxiliary details
   const toggleButton = document.getElementById('toggleAuxiliary');
   const auxiliaryDetails = document.getElementById('auxiliaryDetails');
   const toggleIcon = document.getElementById('toggleIcon');

@@ -45,7 +45,10 @@ const handleError = (res, error) => {
 // fetch country data
 app.post("/search", async (req, res) => {  
 
-  const countryName = req.body.countryName.trim();
+  // const countryName = req.body.countryName.trim();
+  console.log(req.body);
+  
+  const countryName = req.body.searchInput.trim(); 
 
   try {
     console.log(`${API_URL}${nameEndpoint(countryName)}${endpointFields}`);

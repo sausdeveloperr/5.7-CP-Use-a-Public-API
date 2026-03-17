@@ -594,6 +594,10 @@ select#searchType {
   padding-right: 2.5rem;
 }
 
+.pest {
+  border: 2px solid red;
+}
+
 .container{
   width: 100%;
 }
@@ -654,6 +658,34 @@ select#searchType {
 
 .top-1\/2{
   top: 50%;
+}
+
+.left-1{
+  left: 0.25rem;
+}
+
+.left-1\/2{
+  left: 50%;
+}
+
+.left-full{
+  left: 100%;
+}
+
+.left-3\/4{
+  left: 75%;
+}
+
+.left-\[\]{
+  left: ;
+}
+
+.left-\[80\]{
+  left: 80;
+}
+
+.left-\[80\%\]{
+  left: 80%;
 }
 
 .mx-auto{
