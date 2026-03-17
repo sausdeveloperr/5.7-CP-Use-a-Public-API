@@ -3,6 +3,7 @@
 
 // TODOs
 // - Add loading state for the search button (e.g., show a FE spinner in #mainContent while waiting for the API response)
+// - Add logic to display the footer.ejs when the search results is being displayed, and hiding it when the search results is hidden.
 
 // input field dropdown menu
 document.addEventListener('DOMContentLoaded', () => {
@@ -11,20 +12,20 @@ document.addEventListener('DOMContentLoaded', () => {
   const select = document.getElementById('searchType');
 
   const placeholders = {
-    name:     "Enter country name...",
-    alpha:    "Enter code (e.g. USA, NGA, BRA)...",
-    capital:  "Enter capital city...",
-    region:   "Enter region (e.g. Africa, Europe)...",
-    currency: "Enter currency code (e.g. USD, NGN)...",
-    language: "Enter language (e.g. English, Spanish)...",
-    demonym:  "Enter demonym (e.g. Nigerian, French)..."
+    name:     "Enter country name",
+    alpha:    "Enter code e.g. jp, usa, aus",
+    capital:  "Enter capital city",
+    region:   "Enter region e.g. africa, europe, americas", /* TODO: verify if america or americas in api endpoint */
+    currency: "Enter currency e.g. gbp, inr, zar", /* TODO: verify if code or full curr name in api endpoint */
+    language: "Enter language e.g. spanish, hindu, swahili",
+    demonym:  "Enter demonym e.g. emirati, brazilian, nigerian"
   };
 
   select.addEventListener('change', () => {
     const type = select.value;
     input.placeholder = placeholders[type] || "Enter search term...";
     
-    // Optional: clear input when changing type
+    // clear input when changing type
     // input.value = '';
   });
 
