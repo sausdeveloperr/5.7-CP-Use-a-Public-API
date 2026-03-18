@@ -28,7 +28,7 @@ const handleResponse = (res, responseObj) => {
 const handleError = (res, error) => {
   if (error.response && error.response.status === 404) {
     console.error("API Error:", error.response.data);
-    res.status(404).render("index", { content: "Country not found. Try a different spelling." });
+    res.status(404).render("index", { content: "Country not found. Try a different spelling or filter." });
   } else {
     console.error("API Error:", error);
     res.status(500).render("index", { content: "An error occurred. Please try again." });
@@ -52,19 +52,19 @@ app.post("/search", async (req, res) => {
   const query = searchInput.trim();
 
   let endpoint = '';
-  switch(searchType) {
-    case 'name':     endpoint = `/name/${encodeURIComponent(query)}?fullText=true&`; break;
-    case 'alpha':    endpoint = `/alpha/${query.toUpperCase()}?`; break; /* TODO: fix uppercase malfunction */
-    case 'capital':  endpoint = `/capital/${encodeURIComponent(query)}`; break;
-    
-    case 'region': endpoint = `/region/${encodeURIComponent(query)}`; break;
-    case 'currency': endpoint = `/currency/${encodeURIComponent(query)}`; break;
-    case 'language': endpoint = `/lang/${encodeURIComponent(query)}`; break;
-    case 'demonym':  endpoint = `/demonym/${encodeURIComponent(query)}`; break;
+  switch (searchType) {
+    // TODO: handle single output cases first
+    // TODO: handle multiple output cases first
+    case 'name':     endpoint = `/name/${encodeURIComponent(query)}?fullText=true&`; break; /* single */ 
+    case 'alpha':    endpoint = `/alpha/${query.toUpperCase()}?`; break; /* single */
+    case 'capital':  endpoint = `/capital/${encodeURIComponent(query)}?`; break; /* single/multiple(incomplete input capital) */
+    case 'region': endpoint = `/region/${encodeURIComponent(query)}?`; break; /* multiple */
+    case 'currency': endpoint = `/currency/${encodeURIComponent(query)}?`; break; /* single/multiple */
+    case 'language': endpoint = `/lang/${encodeURIComponent(query)}?`; break; /* single/multiple */
+    case 'demonym':  endpoint = `/demonym/${encodeURIComponent(query)}?`; break; /* single/multiple */
     default: 
-      res.status(400).render("index", { content: "Invalid search type." });
+      endpoint = `/name/${encodeURIComponent(query)}?fullText=true&`;
       return;
-    // ... etc.
   }
 
   try {
