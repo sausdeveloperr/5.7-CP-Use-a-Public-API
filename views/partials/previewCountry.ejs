@@ -1,0 +1,87 @@
+ <!-- add a hover class to article card in V2-->
+  <!--
+    - previewCountry.ejs contains all of countryCard's content except auxiliary details section
+    - contains accented "View Details" button that links to a modal containing countryCard.ejs (entire card is also clickable to open the modal)
+    - same country object is passed to modal containing countryCard.ejs
+  -->
+
+<article class="bg-white dark:bg-gray-800 rounded-3xl shadow-lg dark:shadow-gray-950 border border-gray-200 dark:border-gray-700 overflow-hidden transition-all duration-300">
+  <!-- Main card content -->
+  <div class="p-6 md:p-8">
+    <!-- Flag and header section -->
+    <div class="flex flex-col gap-6 mb-8">
+      <!-- Flag image -->
+      <div class="w-full flex-shrink-0">
+        <figure class="w-full h-48 md:h-64 rounded-2xl overflow-hidden border-2 border-gray-300 dark:border-gray-600 bg-gradient-to-br from-gray-300 to-gray-400 dark:from-gray-700 dark:to-gray-600">
+          <img 
+            src="<%= country.flags.svg %>" 
+            alt="<%= country.flags.alt || 'Flag of ' + country.name.common %>"
+            class="w-full h-full object-contain animate-pulse"
+            loading="lazy"
+            onload="this.classList.remove('animate-pulse')"
+          />
+        </figure>
+      </div>
+
+      <!-- Country info section -->
+      <div class="w-full">
+        <div class="mb-6">
+          <h2 class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-1">
+            <%= country.name.common %>
+          </h2>
+          <p class="text-sm md:text-base text-gray-600 dark:text-gray-400 font-medium">
+            <%= country.name.official %>
+          </p>
+        </div>
+
+        <div class="grid grid-cols-2 gap-6 text-sm">
+          <div>
+            <p class="text-gray-500 dark:text-gray-400 text-xs uppercase font-semibold mb-1 flex items-center gap-1">
+              <span class="material-icons text-base">location_city</span> Capital
+            </p>
+            <p class="text-gray-900 dark:text-gray-100 font-semibold">
+              <%= country.capital ? country.capital.join(', ') : 'N/A' %>
+            </p>
+          </div>
+          <div>
+            <p class="text-gray-500 dark:text-gray-400 text-xs uppercase font-semibold mb-1 flex items-center gap-1">
+              <span class="material-icons text-base">public</span> Region
+            </p>
+            <p class="text-gray-900 dark:text-gray-100 font-semibold">
+              <%= country.region || 'N/A' %>
+            </p>
+          </div>
+          <div>
+            <p class="text-gray-500 dark:text-gray-400 text-xs uppercase font-semibold mb-1 flex items-center gap-1">
+              <span class="material-icons text-base">map</span> Subregion
+            </p>
+            <p class="text-gray-900 dark:text-gray-100 font-semibold">
+              <%= country.subregion || 'N/A' %>
+            </p>
+          </div>
+          <div>
+            <p class="text-gray-500 dark:text-gray-400 text-xs uppercase font-semibold mb-1 flex items-center gap-1">
+              <span class="material-icons text-base">people</span> Demonym
+            </p>
+            <p class="text-gray-900 dark:text-gray-100 font-semibold">
+              <%= country.demonyms?.eng?.m || country.demonyms?.eng?.f || 'N/A' %>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- View details Button wrapper -->
+    <div class="space-y-4">
+      <button 
+        type="button"
+        aria-label="View details for this country"
+        title="View details for this country"
+        class="w-full px-6 py-3 bg-blue-500 active:bg-blue-700 active:scale-95 dark:bg-blue-600 dark:hover:bg-blue-500 dark:active:bg-blue-700 text-white font-semibold rounded-2xl flex items-center justify-center gap-2 transition-all duration-200 hover:shadow-xl active:shadow-md focus:outline-none focus:ring-2 focus:ring-blue-400 dark:focus:ring-blue-500 focus:ring-offset-2 dark:focus:ring-offset-gray-900 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
+        style="background-color: var(--color-accent);"
+      >
+        <span>View details</span>
+      </button>
+    </div>
+  </div>
+</article>
