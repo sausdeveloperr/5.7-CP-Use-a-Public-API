@@ -1,11 +1,13 @@
- <!-- add a hover class to article card in V2-->
+ <!-- ✅ add a hover class to article card in V2-->
   <!--
     - previewCountry.ejs contains all of countryCard's content except auxiliary details section
     - contains accented "View Details" button that links to a modal containing countryCard.ejs (entire card is also clickable to open the modal)
     - same country object is passed to modal containing countryCard.ejs
   -->
 
-<article class="bg-white dark:bg-gray-800 rounded-3xl shadow-lg dark:shadow-gray-950 border border-gray-200 dark:border-gray-700 overflow-hidden transition-all duration-300">
+<article 
+  data-cca3="<%= country.cca3 %>"
+  class="bg-white dark:bg-gray-800 rounded-3xl shadow-lg dark:shadow-gray-950 border border-gray-200 dark:border-gray-700 overflow-hidden hover:scale-[101%] transition-all duration-300">
   <!-- Main card content -->
   <div class="p-6 md:p-8">
     <!-- Flag and header section -->
