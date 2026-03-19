@@ -8,7 +8,7 @@
     "start": "node index.js",
     "dev": "nodemon index.js",
     "build-css": "tailwindcss -i ./public/css/input.css -o ./public/css/output.css",
-    "watch-css": "tailwindcss -i ./public/css/input.css -o ./public/css/output.css --watch"
+    "tw": "tailwindcss -i ./public/css/input.css -o ./public/css/output.css --watch"
   },
   "keywords": [],
   "author": "Lekan Sausdev",

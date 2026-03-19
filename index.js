@@ -55,7 +55,7 @@ app.post("/search", async (req, res) => {
   switch (searchType) {
     // TODO: handle single output cases first
     // TODO: handle multiple output cases first
-    case 'name':     endpoint = `/name/${encodeURIComponent(query)}?fullText=true&`; break; /* single */ 
+    case 'name':     endpoint = `/name/${encodeURIComponent(query)}?fullText=true&`; break; /* single */
     case 'alpha':    endpoint = `/alpha/${query.toUpperCase()}?`; break; /* single */
     case 'capital':  endpoint = `/capital/${encodeURIComponent(query)}?`; break; /* single/multiple(incomplete input capital) */
     case 'region': endpoint = `/region/${encodeURIComponent(query)}?`; break; /* multiple */
