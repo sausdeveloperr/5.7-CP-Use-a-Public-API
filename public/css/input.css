@@ -26,22 +26,60 @@
 
   h1, h2, h3, h4, h5, h6 {
     font-family: "Poppins", sans-serif;
-      font-weight: 400;
-  font-style: normal;
+    font-weight: 400;
+    font-style: normal;
   }
 
+  /* Search type dropdown */
   select#searchType {
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3E%3Cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m6 8 4 4 4-4'/%3E%3C/svg%3E");
-  background-position: right 0.5rem center;
-  background-repeat: no-repeat;
-  background-size: 1.5em;
-  padding-right: 2.5rem;
-}
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3E%3Cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m6 8 4 4 4-4'/%3E%3C/svg%3E");
+    background-position: right 0.5rem center;
+    background-repeat: no-repeat;
+    background-size: 1.5em;
+    padding-right: 2.5rem;
+  }
 
-.dark select#searchType {
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3E%3Cpath stroke='%239ca3af' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m6 8 4 4 4-4'/%3E%3C/svg%3E");
-}
+  .dark select#searchType {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3E%3Cpath stroke='%239ca3af' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m6 8 4 4 4-4'/%3E%3C/svg%3E");
+  }
 
+  /* previewCountry card css */
+    .preview-card.modal-active {
+    position: fixed !important;
+    inset: 5% !important;
+    margin: auto !important;
+    max-width: 70vw !important;
+    max-height: 90vh !important;
+    z-index: 50 !important;
+    transform: scale(1.02) !important;
+    overflow-y: scroll !important;
+    box-shadow: 0 25px 50px -12px rgba(0,0,0,0.6) !important;
+    border-radius: 2rem !important;
+  }
+
+  .preview-card.modal-active .preview-content {
+    display: none !important;
+  }
+
+  .preview-card.modal-active .full-details {
+    display: block !important;
+  }
+
+  body.modal-open {
+    overflow: hidden !important;
+  }
+
+  .backdrop {
+    opacity: 0;
+    transition: opacity 0.5s ease;
+  }
+
+  .preview-card.modal-active + .backdrop {
+    display: block !important;
+    opacity: 1 !important;
+  }
+
+  /* pesticide css */
   .pest {
     border: 2px solid red;
   }

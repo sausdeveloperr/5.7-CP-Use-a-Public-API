@@ -1,18 +1,11 @@
- <!-- ✅ add a hover class to article card in V2-->
-  <!--
-    - previewCountry.ejs contains all of countryCard's content except auxiliary details section
-    - contains accented "View Details" button that links to a modal containing countryCard.ejs (entire card is also clickable to open the modal)
-    - same country object is passed to modal containing countryCard.ejs
-  -->
-
 <article 
-  data-cca3="<%= country.cca3 %>"
-  class="bg-white dark:bg-gray-800 rounded-3xl shadow-lg dark:shadow-gray-950 border border-gray-200 dark:border-gray-700 overflow-hidden hover:scale-[101%] transition-all duration-300">
-  <!-- Main card content -->
-  <div class="p-6 md:p-8">
-    <!-- Flag and header section -->
+  id="card-<%= country.cca3 %>"
+  class="preview-card bg-white dark:bg-gray-800 rounded-3xl shadow-lg dark:shadow-gray-950 border border-gray-200 dark:border-gray-700 overflow-hidden transition-all duration-500 ease-out z-10 relative hover:scale-105">
+
+  <!-- Preview part (Part 1 - default visible) -->
+  <div class="preview-content p-6 md:p-8">
+    <!-- Flag and basic info -->
     <div class="flex flex-col gap-6 mb-8">
-      <!-- Flag image -->
       <div class="w-full flex-shrink-0">
         <figure class="w-full h-48 md:h-64 rounded-2xl overflow-hidden border-2 border-gray-300 dark:border-gray-600 bg-gradient-to-br from-gray-300 to-gray-400 dark:from-gray-700 dark:to-gray-600">
           <img 
@@ -25,18 +18,15 @@
         </figure>
       </div>
 
-      <!-- Country info section -->
       <div class="w-full">
-        <div class="mb-6">
-          <h2 class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-1">
-            <%= country.name.common %>
-          </h2>
-          <p class="text-sm md:text-base text-gray-600 dark:text-gray-400 font-medium">
-            <%= country.name.official %>
-          </p>
-        </div>
+        <h2 class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-1">
+          <%= country.name.common %>
+        </h2>
+        <p class="text-sm md:text-base text-gray-600 dark:text-gray-400 font-medium">
+          <%= country.name.official %>
+        </p>
 
-        <div class="grid grid-cols-2 gap-6 text-sm">
+        <div class="grid grid-cols-2 gap-6 mt-6 text-sm">
           <div>
             <p class="text-gray-500 dark:text-gray-400 text-xs uppercase font-semibold mb-1 flex items-center gap-1">
               <span class="material-icons text-base">location_city</span> Capital
@@ -53,37 +43,294 @@
               <%= country.region || 'N/A' %>
             </p>
           </div>
-          <div>
-            <p class="text-gray-500 dark:text-gray-400 text-xs uppercase font-semibold mb-1 flex items-center gap-1">
-              <span class="material-icons text-base">map</span> Subregion
-            </p>
-            <p class="text-gray-900 dark:text-gray-100 font-semibold">
-              <%= country.subregion || 'N/A' %>
-            </p>
-          </div>
-          <div>
-            <p class="text-gray-500 dark:text-gray-400 text-xs uppercase font-semibold mb-1 flex items-center gap-1">
-              <span class="material-icons text-base">people</span> Demonym
-            </p>
-            <p class="text-gray-900 dark:text-gray-100 font-semibold">
-              <%= country.demonyms?.eng?.m || country.demonyms?.eng?.f || 'N/A' %>
-            </p>
-          </div>
         </div>
       </div>
     </div>
 
-    <!-- View details Button wrapper -->
-    <div class="space-y-4">
-      <button 
-        type="button"
-        aria-label="View details for this country"
-        title="View details for this country"
-        class="w-full px-6 py-3 bg-blue-500 active:bg-blue-700 active:scale-95 dark:bg-blue-600 dark:hover:bg-blue-500 dark:active:bg-blue-700 text-white font-semibold rounded-2xl flex items-center justify-center gap-2 transition-all duration-200 hover:shadow-xl active:shadow-md focus:outline-none focus:ring-2 focus:ring-blue-400 dark:focus:ring-blue-500 focus:ring-offset-2 dark:focus:ring-offset-gray-900 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
-        style="background-color: var(--color-accent);"
-      >
-        <span>View details</span>
-      </button>
+    <!-- View details button -->
+    <button 
+      class="view-details-btn w-full px-6 py-3 bg-blue-500 hover:bg-blue-600 active:bg-blue-700 text-white font-semibold rounded-2xl transition-all duration-300 hover:shadow-xl active:scale-95"
+    >
+      View Details
+    </button>
+  </div>
+
+  <!-- Full details part (Part 2 - default hidden) -->
+   <!-- TODO:
+    - Add backdrop on this div via css when active
+    - remove its scroll but still make it scrollable
+    - disable all hover effect on other preview cards while active
+    - position close button to be fixed at top-right-corner
+    - make modals transition into page more smooth
+     -->
+  <div class="full-details hidden p-6 md:p-8">
+    <!-- Main card content -->
+    <div class="p-6 md:p-8">
+      <!-- Flag and header section -->
+      <div class="flex flex-col sm:flex-row gap-6 mb-8">
+        <!-- Flag image -->
+        <div class="w-full sm:w-[55%] flex-shrink-0">
+          <figure class="w-full h-48 md:h-64 rounded-2xl overflow-hidden border-2 border-gray-300 dark:border-gray-600 bg-gradient-to-br from-gray-300 to-gray-400 dark:from-gray-700 dark:to-gray-600">
+            <img 
+              src="<%= country.flags.svg %>" 
+              alt="<%= country.flags.alt || 'Flag of ' + country.name.common %>"
+              class="w-full h-full object-contain animate-pulse"
+              loading="lazy"
+              onload="this.classList.remove('animate-pulse')"
+            />
+          </figure>
+        </div>
+
+        <!-- Country info section -->
+        <div class="w-full sm:w-[45%]">
+          <div class="mb-6">
+            <h2 class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-1">
+              <%= country.name.common %>
+            </h2>
+            <p class="text-sm md:text-base text-gray-600 dark:text-gray-400 font-medium">
+              <%= country.name.official %>
+            </p>
+          </div>
+
+          <div class="grid grid-cols-2 gap-6 text-sm">
+            <div>
+              <p class="text-gray-500 dark:text-gray-400 text-xs uppercase font-semibold mb-1 flex items-center gap-1">
+                <span class="material-icons text-base">location_city</span> Capital
+              </p>
+              <p class="text-gray-900 dark:text-gray-100 font-semibold">
+                <%= country.capital ? country.capital.join(', ') : 'N/A' %>
+              </p>
+            </div>
+            <div>
+              <p class="text-gray-500 dark:text-gray-400 text-xs uppercase font-semibold mb-1 flex items-center gap-1">
+                <span class="material-icons text-base">public</span> Region
+              </p>
+              <p class="text-gray-900 dark:text-gray-100 font-semibold">
+                <%= country.region || 'N/A' %>
+              </p>
+            </div>
+            <div>
+              <p class="text-gray-500 dark:text-gray-400 text-xs uppercase font-semibold mb-1 flex items-center gap-1">
+                <span class="material-icons text-base">map</span> Subregion
+              </p>
+              <p class="text-gray-900 dark:text-gray-100 font-semibold">
+                <%= country.subregion || 'N/A' %>
+              </p>
+            </div>
+            <div>
+              <p class="text-gray-500 dark:text-gray-400 text-xs uppercase font-semibold mb-1 flex items-center gap-1">
+                <span class="material-icons text-base">people</span> Demonym
+              </p>
+              <p class="text-gray-900 dark:text-gray-100 font-semibold">
+                <%= country.demonyms?.eng?.m || country.demonyms?.eng?.f || 'N/A' %>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Quick stats: Population, Dial Code et al -->
+      <div class="grid grid-cols-2 sm:grid-cols-4 gap-6 mb-8 pb-8 border-b border-gray-200 dark:border-gray-700">
+        <div class="flex items-start gap-3">
+          <span class="material-icons text-blue-500 dark:text-blue-400 flex-shrink-0 mt-1">people</span>
+          <div class="">
+            <p class="text-xs text-gray-500 dark:text-gray-400 uppercase font-semibold">Population</p>
+            <p class="text-lg font-bold text-gray-900 dark:text-white">
+              <% 
+                const pop = country.population;
+                let displayPop = '';
+                
+                if (pop >= 1000000000) {
+                  displayPop = (pop / 1000000000).toFixed(1) + 'B';
+                } else if (pop >= 1000000) {
+                  displayPop = (pop / 1000000).toFixed(1) + 'M';
+                } else if (pop >= 1000) {
+                  displayPop = (pop / 1000).toFixed(1) + 'K';
+                } else {
+                  displayPop = pop.toString();
+                }
+              %>
+              <%= displayPop %>
+            </p>
+          </div>
+        </div>
+        <div class="flex items-start gap-3">
+          <span class="material-icons text-blue-500 dark:text-blue-400 flex-shrink-0 mt-1">phone</span>
+          <div>
+            <p class="text-xs text-gray-500 dark:text-gray-400 uppercase font-semibold">Dial Code</p>
+            <p class="text-lg font-bold text-gray-900 dark:text-white">
+              <%= country.idd.root %><%= country.idd.suffixes ? country.idd.suffixes[0] : '' %>
+            </p>
+          </div>
+        </div>
+        <div class="flex items-start gap-3">
+          <span class="material-icons text-blue-500 dark:text-blue-400 flex-shrink-0 mt-1">
+            <%= country.landlocked ? 'terrain' : 'water' %>
+          </span>
+          <div>
+            <p class="text-xs text-gray-500 dark:text-gray-400 uppercase font-semibold">Landlocked</p>
+            <p class="text-lg font-bold text-gray-900 dark:text-white">
+              <%= country.landlocked ? 'Yes' : 'No' %>
+            </p>
+          </div>
+        </div>
+        <div class="flex items-start gap-3">
+          <span class="material-icons text-blue-500 dark:text-blue-400 flex-shrink-0 mt-1">directions_car</span>
+          <div>
+            <p class="text-xs text-gray-500 dark:text-gray-400 uppercase font-semibold">Car Side</p>
+            <p class="text-lg font-bold text-gray-900 dark:text-white">
+              <%= country.car.side === 'right' ? 'Right' : 'Left' %>
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Buttons wrapper -->
+      <div class="space-y-4">
+        <!-- Auxiliary toggle button -->
+        <button 
+          id="toggleAuxiliary" 
+          type="button"
+          aria-expanded="false"
+          aria-controls="auxiliaryDetails"
+          class="w-full py-3 px-6 flex items-center justify-between bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 rounded-2xl border border-gray-300 dark:border-gray-600 transition-all duration-200 group"
+        >
+          <span class="font-semibold text-gray-900 dark:text-white flex items-center gap-2">
+            <span class="material-icons text-lg">info</span>
+            Auxiliary Details
+          </span>
+          <span class="material-icons text-gray-600 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white transition-transform duration-300" id="toggleIcon">expand_more</span>
+        </button>
+
+        <!-- What's happening button -->
+        <button 
+          type="button"
+          aria-label="What's happening in this country"
+          title="Feature coming soon!"
+          class="w-full px-6 py-3 bg-blue-500 hover:scale-105 active:bg-blue-700 active:scale-95 dark:bg-blue-600 dark:hover:bg-blue-500 dark:active:bg-blue-700 text-white font-semibold rounded-2xl flex items-center justify-center gap-2 transition-all duration-200 hover:shadow-lg active:shadow-md focus:outline-none focus:ring-2 focus:ring-blue-400 dark:focus:ring-blue-500 focus:ring-offset-2 dark:focus:ring-offset-gray-900 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
+          style="background-color: var(--color-accent);"
+          disabled
+        >
+          <span class="material-icons text-lg md:text-xl hidden md:block">newspaper</span>
+          <span>What's happening in this country?</span>
+        </button>
+      </div>
     </div>
+  
+    <!-- Auxiliary details section -->
+    <div class="p-6 md:p-8 bg-gray-50 dark:bg-gray-900 border-t border-gray-200 dark:border-gray-700">
+      <!-- Timezones -->
+      <section class="mb-8">
+        <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-4 flex items-center gap-2">
+          <span class="material-icons">schedule</span>
+          Timezones
+        </h3>
+        <div class="flex flex-wrap gap-2">
+          <% country.timezones.forEach(tz => { %>
+            <span class="px-3 py-2 bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 text-sm font-medium text-gray-900 dark:text-gray-100">
+              <%= tz %>
+            </span>
+          <% }); %>
+        </div>
+      </section>
+
+      <!-- Languages -->
+      <section class="mb-8">
+        <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-4 flex items-center gap-2">
+          <span class="material-icons">language</span>
+          Languages
+        </h3>
+        <div class="flex flex-wrap gap-2">
+          <% Object.values(country.languages).forEach(lang => { %>
+            <span class="px-3 py-2 bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 text-sm font-medium text-gray-900 dark:text-gray-100">
+              <%= lang %>
+            </span>
+          <% }); %>
+        </div>
+      </section>
+
+      <!-- Currencies -->
+      <section class="mb-8">
+        <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-4 flex items-center gap-2">
+          <span class="material-icons">attach_money</span>
+          Currencies
+        </h3>
+        <div class="grid gap-3 grid-cols-1 sm:grid-cols-2">
+          <% Object.entries(country.currencies).forEach(([currCode, currObj]) => { %>
+            <div class="flex items-center justify-between p-3 bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700">
+              <div>
+                <p class="font-semibold text-gray-900 dark:text-white"><%= currCode %></p>
+                <p class="text-sm text-gray-600 dark:text-gray-400"><%= currObj.name %></p>
+              </div>
+              <span class="text-3xl font-bold text-blue-500 dark:text-blue-400"><%= currObj.symbol %></span>
+            </div>
+          <% }); %>
+        </div>
+      </section>
+
+      <!-- Additional info -->
+      <section>
+        <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-4 flex items-center gap-2">
+          <span class="material-icons">more_horiz</span>
+          Additional Info
+        </h3>
+        <div class="grid grid-cols-2 gap-4">
+          <div class="p-3 bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700">
+            <p class="text-xs text-gray-500 dark:text-gray-400 uppercase font-semibold mb-1">Week Start</p>
+            <p class="font-semibold text-gray-900 dark:text-white capitalize">
+              <%= country.startOfWeek || 'N/A' %>
+            </p>
+          </div>
+          <div class="p-3 bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700">
+            <p class="text-xs text-gray-500 dark:text-gray-400 uppercase font-semibold mb-1">UN Member</p>
+            <p class="font-semibold text-gray-900 dark:text-white">
+              <%= country.unMember ? 'Yes' : 'No' %>
+            </p>
+          </div>
+        </div>
+      </section>
+    </div>
+    
+    <!-- Close button -->
+    <button 
+      class="close-modal w-full mt-6 px-6 py-3 bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 text-gray-900 dark:text-gray-100 font-semibold rounded-2xl transition-all duration-300"
+      >
+      Close
+    </button>
   </div>
 </article>
+
+<script>
+  // Add event listeners for view details and close buttons
+  document.querySelectorAll('.view-details-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const card = btn.closest('.preview-card');
+      card.classList.add('modal-active');
+      document.body.classList.add('modal-open');
+      document.body.style.overflow = 'hidden';
+      document.addEventListener('click', handleBackdropClick);
+    });
+  });
+
+  document.querySelectorAll('.close-modal').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const card = btn.closest('.preview-card');
+      card.classList.remove('modal-active');
+      document.body.classList.remove('modal-open');
+      document.body.style.overflow = 'auto';
+      document.removeEventListener('click', handleBackdropClick);
+    });
+  });
+
+  function handleBackdropClick(e) {
+    if (e.target.classList.contains('backdrop')) {
+      const card = document.querySelector('.preview-card.modal-active');
+      if (card) {
+        card.classList.remove('modal-active');
+        document.body.classList.remove('modal-open');
+        document.body.style.overflow = 'auto';
+        document.removeEventListener('click', handleBackdropClick);
+      }
+    }
+  }
+</script>

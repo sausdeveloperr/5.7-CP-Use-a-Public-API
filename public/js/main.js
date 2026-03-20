@@ -13,12 +13,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const placeholders = {
     name:     "Enter country name",
-    alpha:    "Enter code e.g. jp, usa, aus",
+    alpha:    "Enter code - jp, usa, aus",
     capital:  "Enter capital city",
-    region:   "Enter region e.g. africa, europe, americas", /* TODO: verify if america or americas in api endpoint */
-    currency: "Enter currency e.g. gbp, inr, zar", /* TODO: verify if code or full curr name in api endpoint */
-    language: "Enter language e.g. spanish, hindu, swahili",
-    demonym:  "Enter demonym e.g. emirati, brazilian, nigerian"
+    region:   "Enter region - africa, europe, oceania",
+    currency: "Enter currency - gbp, inr", /* TODO: verify if code or full curr name in api endpoint */
+    language: "Enter language - spanish, swahili",
+    demonym:  "Enter demonym - brazilian, nigerian"
   };
 
   select.addEventListener('change', () => {
@@ -55,4 +55,23 @@ document.addEventListener('DOMContentLoaded', () => {
       toggleIcon.style.transform = 'rotate(0deg)';
     }
   });
+
+
+  // view details button in country preview cards
+/*   document.querySelectorAll('.view-details-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      alert('View details button clicked!');
+      const card = btn.closest('.preview-card');
+      card.classList.add('modal-active');
+      document.body.classList.add('modal-open');
+    });
+  }); */
+
+/*   document.querySelectorAll('.close-modal').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const card = btn.closest('.preview-card');
+      card.classList.remove('modal-active');
+      document.body.classList.remove('modal-open');
+    });
+  }); */
 });
