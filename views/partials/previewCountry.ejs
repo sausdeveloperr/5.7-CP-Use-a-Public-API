@@ -57,10 +57,11 @@
 
   <!-- Full details part (Part 2 - default hidden) -->
    <!-- TODO:
+    - ✅make mobile modal wider than at sm: breakpoint
+    - ✅make icon sizes of quick stats more responsive
     - Add backdrop on this div via css when active
     - remove its scroll but still make it scrollable
     - disable all hover effect on other preview cards while active
-    - position close button to be fixed at top-right-corner
     - make modals transition into page more smooth
      -->
   <div class="full-details hidden p-6 md:p-8">
@@ -92,7 +93,7 @@
             </p>
           </div>
 
-          <div class="grid grid-cols-2 gap-6 text-sm">
+          <div class="grid grid-cols-2 gap-8 sm:gap-6 text-sm">
             <div>
               <p class="text-gray-500 dark:text-gray-400 text-xs uppercase font-semibold mb-1 flex items-center gap-1">
                 <span class="material-icons text-base">location_city</span> Capital
@@ -130,9 +131,9 @@
       </div>
 
       <!-- Quick stats: Population, Dial Code et al -->
-      <div class="grid grid-cols-2 sm:grid-cols-4 gap-6 mb-8 pb-8 border-b border-gray-200 dark:border-gray-700">
+      <div class="grid grid-cols-2 sm:grid-cols-4 gap-8 sm:gap-6 mb-8 pb-8 dark:border-gray-700">
         <div class="flex items-start gap-3">
-          <span class="material-icons text-blue-500 dark:text-blue-400 flex-shrink-0 mt-1">people</span>
+          <span class="material-icons text-xl sm:text-2xl text-blue-500 dark:text-blue-400 flex-shrink-0 mt-1">people</span>
           <div class="">
             <p class="text-xs text-gray-500 dark:text-gray-400 uppercase font-semibold">Population</p>
             <p class="text-lg font-bold text-gray-900 dark:text-white">
@@ -155,7 +156,7 @@
           </div>
         </div>
         <div class="flex items-start gap-3">
-          <span class="material-icons text-blue-500 dark:text-blue-400 flex-shrink-0 mt-1">phone</span>
+          <span class="material-icons text-xl sm:text-2xl text-blue-500 dark:text-blue-400 flex-shrink-0 mt-1">phone</span>
           <div>
             <p class="text-xs text-gray-500 dark:text-gray-400 uppercase font-semibold">Dial Code</p>
             <p class="text-lg font-bold text-gray-900 dark:text-white">
@@ -164,7 +165,7 @@
           </div>
         </div>
         <div class="flex items-start gap-3">
-          <span class="material-icons text-blue-500 dark:text-blue-400 flex-shrink-0 mt-1">
+          <span class="material-icons text-xl sm:text-2xl text-blue-500 dark:text-blue-400 flex-shrink-0 mt-1">
             <%= country.landlocked ? 'terrain' : 'water' %>
           </span>
           <div>
@@ -175,7 +176,7 @@
           </div>
         </div>
         <div class="flex items-start gap-3">
-          <span class="material-icons text-blue-500 dark:text-blue-400 flex-shrink-0 mt-1">directions_car</span>
+          <span class="material-icons text-xl sm:text-2xl text-blue-500 dark:text-blue-400 flex-shrink-0 mt-1">directions_car</span>
           <div>
             <p class="text-xs text-gray-500 dark:text-gray-400 uppercase font-semibold">Car Side</p>
             <p class="text-lg font-bold text-gray-900 dark:text-white">
@@ -187,21 +188,6 @@
 
       <!-- Buttons wrapper -->
       <div class="space-y-4">
-        <!-- Auxiliary toggle button -->
-        <button 
-          id="toggleAuxiliary" 
-          type="button"
-          aria-expanded="false"
-          aria-controls="auxiliaryDetails"
-          class="w-full py-3 px-6 flex items-center justify-between bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 rounded-2xl border border-gray-300 dark:border-gray-600 transition-all duration-200 group"
-        >
-          <span class="font-semibold text-gray-900 dark:text-white flex items-center gap-2">
-            <span class="material-icons text-lg">info</span>
-            Auxiliary Details
-          </span>
-          <span class="material-icons text-gray-600 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white transition-transform duration-300" id="toggleIcon">expand_more</span>
-        </button>
-
         <!-- What's happening button -->
         <button 
           type="button"
@@ -218,7 +204,7 @@
     </div>
   
     <!-- Auxiliary details section -->
-    <div class="p-6 md:p-8 bg-gray-50 dark:bg-gray-900 border-t border-gray-200 dark:border-gray-700">
+    <div class="p-6 md:p-8 bg-gradient-to-b from-gray-50 to-gray-200 dark:from-gray-800 dark:to-gray-900">
       <!-- Timezones -->
       <section class="mb-8">
         <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-4 flex items-center gap-2">
@@ -293,7 +279,7 @@
     
     <!-- Close button -->
     <button 
-      class="close-modal w-full mt-6 px-6 py-3 bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 text-gray-900 dark:text-gray-100 font-semibold rounded-2xl transition-all duration-300"
+      class="close-modal w-full mt-6 px-6 py-3 bg-red-700 dark:bg-red-800 hover:bg-red-800 dark:hover:bg-red-900 text-white dark:text-white font-semibold rounded-2xl transition-all duration-300"
       >
       Close
     </button>
@@ -301,7 +287,6 @@
 </article>
 
 <script>
-  // Add event listeners for view details and close buttons
   document.querySelectorAll('.view-details-btn').forEach(btn => {
     btn.addEventListener('click', () => {
       const card = btn.closest('.preview-card');
