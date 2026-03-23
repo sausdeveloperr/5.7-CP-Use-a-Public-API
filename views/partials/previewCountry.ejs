@@ -1,8 +1,9 @@
 <article 
   id="card-<%= country.cca3 %>"
-  class="preview-card bg-white dark:bg-gray-800 rounded-3xl shadow-lg dark:shadow-gray-950 border border-gray-200 dark:border-gray-700 overflow-hidden transition-all duration-500 ease-out z-10 relative hover:scale-105">
-
-  <!-- Preview part (Part 1 - default visible) -->
+  class="preview-card bg-white dark:bg-gray-800 rounded-3xl shadow-lg dark:shadow-gray-950 border border-gray-200 dark:border-gray-700 overflow-hidden transition-all duration-500 ease-out relative z-10"
+  role="group"
+  aria-labelledby="card-title-<%= country.cca3 %>"
+  aria-expanded="false">
   <div class="preview-content p-6 md:p-8">
     <!-- Flag and basic info -->
     <div class="flex flex-col gap-6 mb-8">
@@ -47,24 +48,22 @@
       </div>
     </div>
 
+    <!-- TODO:
+     - move v-de-btn to above close-btn
+     - remove modals scrollbar
+      -->
     <!-- View details button -->
     <button 
-      class="view-details-btn w-full px-6 py-3 bg-blue-500 hover:bg-blue-600 active:bg-blue-700 text-white font-semibold rounded-2xl transition-all duration-300 hover:shadow-xl active:scale-95"
+      type="button"
+      class="view-details-btn w-full px-6 py-3 bg-blue-500 hover:bg-blue-600 active:bg-blue-700 text-white font-semibold rounded-2xl transition-all duration-300 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-blue-400 dark:focus:ring-blue-500"
+      aria-controls="full-details-<%= country.cca3 %>"
+      aria-expanded="false"
     >
       View Details
     </button>
   </div>
 
-  <!-- Full details part (Part 2 - default hidden) -->
-   <!-- TODO:
-    - ✅make mobile modal wider than at sm: breakpoint
-    - ✅make icon sizes of quick stats more responsive
-    - Add backdrop on this div via css when active
-    - remove its scroll but still make it scrollable
-    - disable all hover effect on other preview cards while active
-    - make modals transition into page more smooth
-     -->
-  <div class="full-details hidden p-6 md:p-8">
+    <div id="full-details-<%= country.cca3 %>" class="full-details hidden p-6 md:p-8" aria-hidden="true">
     <!-- Main card content -->
     <div class="p-6 md:p-8">
       <!-- Flag and header section -->
@@ -285,37 +284,3 @@
     </button>
   </div>
 </article>
-
-<script>
-  document.querySelectorAll('.view-details-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-      const card = btn.closest('.preview-card');
-      card.classList.add('modal-active');
-      document.body.classList.add('modal-open');
-      document.body.style.overflow = 'hidden';
-      document.addEventListener('click', handleBackdropClick);
-    });
-  });
-
-  document.querySelectorAll('.close-modal').forEach(btn => {
-    btn.addEventListener('click', () => {
-      const card = btn.closest('.preview-card');
-      card.classList.remove('modal-active');
-      document.body.classList.remove('modal-open');
-      document.body.style.overflow = 'auto';
-      document.removeEventListener('click', handleBackdropClick);
-    });
-  });
-
-  function handleBackdropClick(e) {
-    if (e.target.classList.contains('backdrop')) {
-      const card = document.querySelector('.preview-card.modal-active');
-      if (card) {
-        card.classList.remove('modal-active');
-        document.body.classList.remove('modal-open');
-        document.body.style.overflow = 'auto';
-        document.removeEventListener('click', handleBackdropClick);
-      }
-    }
-  }
-</script>

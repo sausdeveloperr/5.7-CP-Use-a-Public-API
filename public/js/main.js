@@ -56,22 +56,71 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
+});
 
-  // view details button in country preview cards
-/*   document.querySelectorAll('.view-details-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-      alert('View details button clicked!');
-      const card = btn.closest('.preview-card');
-      card.classList.add('modal-active');
-      document.body.classList.add('modal-open');
-    });
-  }); */
+document.addEventListener("DOMContentLoaded", () => {
+  const backdrop = document.createElement("div");
+  backdrop.className = "modal-backdrop";
+  document.body.appendChild(backdrop);
 
-/*   document.querySelectorAll('.close-modal').forEach(btn => {
-    btn.addEventListener('click', () => {
-      const card = btn.closest('.preview-card');
-      card.classList.remove('modal-active');
-      document.body.classList.remove('modal-open');
+  const cards = Array.from(document.querySelectorAll(".preview-card"));
+
+  const setInactiveCards = (activeCard) => {
+    cards.forEach(card => {
+      if (card !== activeCard) {
+        card.classList.toggle("opacity-40", !!activeCard);
+        card.classList.toggle("pointer-events-none", !!activeCard);
+        card.setAttribute("aria-hidden", !!activeCard ? "true" : "false");
+      }
     });
-  }); */
+  };
+
+  const openModal = (card, details, button) => {
+    card.classList.add("modal-active");
+    card.setAttribute("aria-expanded", "true");
+    details.classList.remove("hidden");
+    details.setAttribute("aria-hidden", "false");
+    button.setAttribute("aria-expanded", "true");
+    backdrop.classList.add("active");
+    document.body.classList.add("overflow-hidden");
+    setInactiveCards(card);
+    card.querySelector(".close-modal").focus();
+  };
+
+  const closeModal = (card, details, button) => {
+    card.classList.remove("modal-active");
+    card.setAttribute("aria-expanded", "false");
+    details.classList.add("hidden");
+    details.setAttribute("aria-hidden", "true");
+    button.setAttribute("aria-expanded", "false");
+    backdrop.classList.remove("active");
+    document.body.classList.remove("overflow-hidden");
+    setInactiveCards(null);
+    card.querySelector(".view-details-btn").focus();
+  };
+
+  cards.forEach(card => {
+    const button = card.querySelector(".view-details-btn");
+    const closeBtn = card.querySelector(".close-modal");
+    const details = card.querySelector(".full-details");
+
+    if (!button || !closeBtn || !details) return;
+
+    button.addEventListener("click", () => openModal(card, details, button));
+    closeBtn.addEventListener("click", () => closeModal(card, details, button));
+
+    card.addEventListener("keydown", (event) => {
+      if (event.key === "Escape" && card.classList.contains("modal-active")) {
+        closeModal(card, details, button);
+      }
+    });
+  });
+
+  backdrop.addEventListener("click", () => {
+    const activeCard = document.querySelector(".preview-card.modal-active");
+    if (!activeCard) return;
+    const details = activeCard.querySelector(".full-details");
+    const button = activeCard.querySelector(".view-details-btn");
+    closeModal(activeCard, details, button);
+  });
 });
