@@ -4,6 +4,8 @@
   role="group"
   aria-labelledby="card-title-<%= country.cca3 %>"
   aria-expanded="false">
+
+  <!-- preview -->
   <div class="preview-content p-6 md:p-8">
     <!-- Flag and basic info -->
     <div class="flex flex-col gap-6 mb-8">
@@ -48,10 +50,6 @@
       </div>
     </div>
 
-    <!-- TODO:
-     - move v-de-btn to above close-btn
-     - remove modals scrollbar
-      -->
     <!-- View details button -->
     <button 
       type="button"
@@ -63,9 +61,10 @@
     </button>
   </div>
 
-    <div id="full-details-<%= country.cca3 %>" class="full-details hidden p-6 md:p-8" aria-hidden="true">
+  <!-- full details on click -->
+  <div id="full-details-<%= country.cca3 %>" class="full-details hidden p-6 md:p-8" aria-hidden="true">
     <!-- Main card content -->
-    <div class="p-6 md:p-8">
+    <div class="p-6">
       <!-- Flag and header section -->
       <div class="flex flex-col sm:flex-row gap-6 mb-8">
         <!-- Flag image -->
@@ -130,7 +129,7 @@
       </div>
 
       <!-- Quick stats: Population, Dial Code et al -->
-      <div class="grid grid-cols-2 sm:grid-cols-4 gap-8 sm:gap-6 mb-8 pb-8 dark:border-gray-700">
+      <div class="grid grid-cols-2 sm:grid-cols-4 gap-8 sm:gap-6 dark:border-gray-700">
         <div class="flex items-start gap-3">
           <span class="material-icons text-xl sm:text-2xl text-blue-500 dark:text-blue-400 flex-shrink-0 mt-1">people</span>
           <div class="">
@@ -184,24 +183,8 @@
           </div>
         </div>
       </div>
-
-      <!-- Buttons wrapper -->
-      <div class="space-y-4">
-        <!-- What's happening button -->
-        <button 
-          type="button"
-          aria-label="What's happening in this country"
-          title="Feature coming soon!"
-          class="w-full px-6 py-3 bg-blue-500 hover:scale-105 active:bg-blue-700 active:scale-95 dark:bg-blue-600 dark:hover:bg-blue-500 dark:active:bg-blue-700 text-white font-semibold rounded-2xl flex items-center justify-center gap-2 transition-all duration-200 hover:shadow-lg active:shadow-md focus:outline-none focus:ring-2 focus:ring-blue-400 dark:focus:ring-blue-500 focus:ring-offset-2 dark:focus:ring-offset-gray-900 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
-          style="background-color: var(--color-accent);"
-          disabled
-        >
-          <span class="material-icons text-lg md:text-xl hidden md:block">newspaper</span>
-          <span>What's happening in this country?</span>
-        </button>
-      </div>
     </div>
-  
+   
     <!-- Auxiliary details section -->
     <div class="p-6 md:p-8 bg-gradient-to-b from-gray-50 to-gray-200 dark:from-gray-800 dark:to-gray-900">
       <!-- Timezones -->
@@ -276,11 +259,27 @@
       </section>
     </div>
     
-    <!-- Close button -->
-    <button 
-      class="close-modal w-full mt-6 px-6 py-3 bg-red-700 dark:bg-red-800 hover:bg-red-800 dark:hover:bg-red-900 text-white dark:text-white font-semibold rounded-2xl transition-all duration-300"
+    <!-- Buttons wrapper -->
+    <div class="space-y-4 mt-4">
+      <!-- What's happening button -->
+      <button 
+        type="button"
+        aria-label="What's happening in this country"
+        title="Feature coming soon!"
+        class="w-full px-6 py-3 bg-blue-500 hover:scale-105 active:bg-blue-700 active:scale-95 dark:bg-blue-600 dark:hover:bg-blue-500 dark:active:bg-blue-700 text-white font-semibold rounded-2xl flex items-center justify-center gap-2 transition-all duration-200 hover:shadow-lg active:shadow-md focus:outline-none focus:ring-2 focus:ring-blue-400 dark:focus:ring-blue-500 focus:ring-offset-2 dark:focus:ring-offset-gray-900 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
+        style="background-color: var(--color-accent);"
+        disabled
       >
-      Close
-    </button>
+        <span class="material-icons text-lg md:text-xl hidden md:block">newspaper</span>
+        <span>What's happening in this country?</span>
+      </button>
+
+      <!-- Close button -->
+      <button 
+        class="close-modal w-full mt-6 px-6 py-3 bg-red-700 dark:bg-red-800 hover:bg-red-800 dark:hover:bg-red-900 text-white dark:text-white font-semibold rounded-2xl transition-all duration-300"
+        >
+        Close
+      </button>
+    </div>
   </div>
 </article>
