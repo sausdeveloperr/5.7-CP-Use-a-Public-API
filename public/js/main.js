@@ -1,8 +1,6 @@
 // File for JS related to modals and other interactive elements on the page,
-// including displaying the footer.ejs when the search results is being displayed, and hiding it when the search results is hidden.
 
 // TODOs
-// - Add loading state for the search button (e.g., show a FE spinner in #mainContent while waiting for the API response)
 // - Add logic to display the footer.ejs when the search results is being displayed, and hiding it when the search results is hidden.
 
 // input field dropdown menu
@@ -12,11 +10,11 @@ document.addEventListener('DOMContentLoaded', () => {
   const select = document.getElementById('searchType');
 
   const placeholders = {
-    name:     "Enter country name",
+    name: "Enter country name",
     alpha:    "Enter code - jp, usa, aus",
     capital:  "Enter capital city",
     region:   "Enter region - africa, europe, oceania",
-    currency: "Enter currency - gbp, inr", /* TODO: verify if code or full curr name in api endpoint */
+    currency: "Enter currency - gbp, inr", 
     language: "Enter language - spanish, swahili",
     demonym:  "Enter demonym - brazilian, nigerian"
   };
@@ -24,9 +22,6 @@ document.addEventListener('DOMContentLoaded', () => {
   select.addEventListener('change', () => {
     const type = select.value;
     input.placeholder = placeholders[type] || "Enter search term...";
-    
-    // clear input when changing type
-    // input.value = '';
   });
 
 
