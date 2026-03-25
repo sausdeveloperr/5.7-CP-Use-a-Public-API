@@ -84,7 +84,18 @@ document.addEventListener("DOMContentLoaded", () => {
     backdrop.classList.add("active");
     document.body.classList.add("overflow-hidden");
     setInactiveCards(card);
-    card.querySelector(".close-modal").focus();
+
+    // reset scroll positions when modal opens
+    card.scrollTop = 0;
+    details.scrollTop = 0;
+    const heading = card.querySelector("[aria-labelledby]");
+    if (heading) heading.scrollIntoView({ block: "start", behavior: "instant" });
+
+    // focus close button without scrolling the modal body
+    const closeBtn = card.querySelector(".close-modal");
+    if (closeBtn) {
+      closeBtn.focus({ preventScroll: true });
+    }
   };
 
   const closeModal = (card, details, button) => {

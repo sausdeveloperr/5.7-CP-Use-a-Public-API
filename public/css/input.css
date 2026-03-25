@@ -133,6 +133,49 @@
     max-height: 3000px;
   }
 
+  /* modal card scrollbar styling */
+  /* TODO:
+  - make scrollbar shorter than parents height
+  */
+  .preview-card.modal-active,
+  .preview-card.modal-active .full-details {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(148, 163, 184, 0.6) rgba(15, 23, 42, 0.5);
+  }
+
+  .preview-card.modal-active::-webkit-scrollbar,
+  .preview-card.modal-active .full-details::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+
+  .preview-card.modal-active::-webkit-scrollbar-track,
+  .preview-card.modal-active .full-details::-webkit-scrollbar-track {
+    background: rgba(148, 163, 184, 0.2);
+    border-radius: 999px;
+  }
+
+  .preview-card.modal-active::-webkit-scrollbar-thumb,
+  .preview-card.modal-active .full-details::-webkit-scrollbar-thumb {
+    background-color: rgba(100, 116, 139, 0.55);
+    border-radius: 999px;
+    border: 2px solid transparent;
+    background-clip: content-box;
+  }
+
+  .preview-card.modal-active::-webkit-scrollbar-thumb:hover,
+  .preview-card.modal-active .full-details::-webkit-scrollbar-thumb:hover {
+    background-color: rgba(100, 116, 139, 0.8);
+  }
+
+  .preview-card.modal-active::-webkit-scrollbar-button,
+  .preview-card.modal-active .full-details::-webkit-scrollbar-button {
+    background-color: rgba(238, 62, 8, 0.55);
+    border-radius: 999px;
+    border: 2px solid transparent;
+    background-clip: content-box;
+  }
+
   /* pesticide css */
   .pest {
     border: 2px solid red;
