@@ -594,6 +594,46 @@ select#searchType {
   padding-right: 2.5rem;
 }
 
+/* Autocomplete dropdown */
+
+#autocompleteDropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  z-index: 50;
+  max-height: 14rem;
+  overflow-y: auto;
+  border-radius: 0.75rem;
+  border: 1px solid rgba(148, 163, 184, 0.5);
+  background-color: rgba(255, 255, 255, 0.96);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+  display: none;
+}
+
+#autocompleteDropdown.open {
+  display: block;
+}
+
+#autocompleteDropdown.closed {
+  display: none;
+}
+
+#autocompleteDropdown button {
+  width: 100%;
+  text-align: left;
+  background: transparent;
+  border: 0;
+  padding: 0.75rem 1rem;
+  color: var(--color-text);
+  font-weight: 500;
+}
+
+#autocompleteDropdown button:hover,
+  #autocompleteDropdown button:focus {
+  background: rgba(59, 130, 246, 0.14);
+}
+
 /* previewCountry card css */
 
 .preview-card {
@@ -1255,6 +1295,15 @@ select#searchType {
   --tw-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
   --tw-shadow-colored: 0 10px 15px -3px var(--tw-shadow-color), 0 4px 6px -4px var(--tw-shadow-color);
   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+}
+
+.blur{
+  --tw-blur: blur(8px);
+  filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
+}
+
+.filter{
+  filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
 }
 
 .transition-all{
