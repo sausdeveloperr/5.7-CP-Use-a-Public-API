@@ -1,184 +1,194 @@
 /* public/css/input.css */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=DM+Sans:opsz,wght@9..40,300&display=swap');
 
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 /* custom CSS */
-@layer base {
+:root {
+  --color-bg: #ffffff;
+  --color-text: #000000;
+  --color-accent: #3b82f6;
+  --color-border: #e5e7eb;
+}
+
+@media (prefers-color-scheme: dark) {
   :root {
-    --color-bg: #ffffff;
-    --color-text: #000000;
-    --color-accent: #3b82f6;
-    --color-border: #e5e7eb;
+    --color-bg: #111827;
+    --color-text: #f9fafb;
+    --color-accent: #60a5fa;
+    --color-border: #374151;
   }
-  @media (prefers-color-scheme: dark) {
-    :root {
-      --color-bg: #111827; 
-      --color-text: #f9fafb;
-      --color-accent: #60a5fa;
-      --color-border: #374151;
-    }
-  }
+}
 
-  body {
-    font-family: "DM Sans", -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  }
+body {
+  font-family: "DM Sans", -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
 
-  h1, h2, h3, h4, h5, h6 {
-    font-family: "Poppins", sans-serif;
-    font-weight: 400;
-    font-style: normal;
-  }
+h1, h2, h3, h4, h5, h6 {
+  font-family: "Poppins", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
 
-  /* Search type dropdown */
+/* Search type dropdown */
+select#searchType {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3E%3Cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m6 8 4 4 4-4'/%3E%3C/svg%3E");
+  background-position: right 0.5rem center;
+  background-repeat: no-repeat;
+  background-size: 1.5em;
+  padding-right: 2.5rem;
+}
+
+@media (prefers-color-scheme: dark) {
   select#searchType {
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3E%3Cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m6 8 4 4 4-4'/%3E%3C/svg%3E");
-    background-position: right 0.5rem center;
-    background-repeat: no-repeat;
-    background-size: 1.5em;
-    padding-right: 2.5rem;
-  }
-
-  .dark select#searchType {
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3E%3Cpath stroke='%239ca3af' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m6 8 4 4 4-4'/%3E%3C/svg%3E");
   }
+}
 
-  /* Autocomplete dropdown */
+/* Autocomplete dropdown */
+#autocompleteDropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  z-index: 50;
+  max-height: 14rem;
+  overflow-y: auto;
+  border-radius: 0.75rem;
+  border: 1px solid rgba(148, 163, 184, 0.5);
+  background-color: rgba(255, 255, 255, 0.96);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+  display: none;
+}
+
+@media (prefers-color-scheme: dark) {
   #autocompleteDropdown {
-    position: absolute;
-    top: 100%;
-    left: 0;
-    right: 0;
-    z-index: 50;
-    max-height: 14rem;
-    overflow-y: auto;
-    border-radius: 0.75rem;
-    border: 1px solid rgba(148, 163, 184, 0.5);
-    background-color: rgba(255, 255, 255, 0.96);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
-    display: none;
-  }
-
-  .dark #autocompleteDropdown {
     background-color: rgba(15, 23, 42, 0.96);
     border-color: rgba(100, 116, 139, 0.6);
   }
+}
 
-  #autocompleteDropdown.open {
-    display: block;
-  }
+#autocompleteDropdown.open {
+  display: block;
+}
 
-  #autocompleteDropdown.closed {
-    display: none;
-  }
+#autocompleteDropdown.closed {
+  display: none;
+}
 
+#autocompleteDropdown button {
+  width: 100%;
+  text-align: left;
+  background: transparent;
+  border: 0;
+  padding: 0.75rem 1rem;
+  color: var(--color-text);
+  font-weight: 500;
+}
+
+@media (prefers-color-scheme: dark) {
   #autocompleteDropdown button {
-    width: 100%;
-    text-align: left;
-    background: transparent;
-    border: 0;
-    padding: 0.75rem 1rem;
-    color: var(--color-text);
-    font-weight: 500;
-  }
-
-  .dark #autocompleteDropdown button {
     color: #f5f5f5;
   }
 
   #autocompleteDropdown button:hover,
   #autocompleteDropdown button:focus {
-    background: rgba(59, 130, 246, 0.14);
-  }
-
-  /* previewCountry card css */
-  .preview-card {
-    transform: scale(1);
-    transition: all 250ms ease;
-  }
-
-  .preview-card.modal-active {
-    /* Mobile-first base */
-    position: fixed !important;
-    inset: 10% !important;
-    margin: auto !important;
-    min-width: 320px !important;
-    max-width: 90vw !important;
-    max-height: 85vh !important;
-    z-index: 50 !important;
-    overflow-y: auto !important;
-    transform: scale(1.02) !important;
-    box-shadow: 0 30px 50px rgba(0, 0, 0, 0.35) !important;
-    border-radius: 2rem !important;
-  }
-
-  @media (min-width: 640px) {
-    .preview-card.modal-active {
-      max-width: 70vw !important;
-      max-height: 90vh !important;
-    }
-  }
-
-  .preview-card.modal-active .preview-content {
-    opacity: 0;
-    transform: translateY(-8px);
-    transition: all 250ms ease;
-    display: none !important;
-  }
-
-  .preview-card.modal-active .full-details {
-    opacity: 1;
-    max-height: 3000px;
-    transition: opacity 300ms ease;
-  }
-
-  .full-details {
-    opacity: 0;
-    max-height: 0;
-    overflow: hidden;
-    transition: opacity 220ms ease, max-height 220ms ease;
-  }
-
-  /* Backdrop */
-  .modal-backdrop {
-    position: fixed;
-    inset: 0;
-    z-index: 30;
-    background: rgba(15, 23, 42, 0.45);
-    backdrop-filter: blur(5px);
-    -webkit-backdrop-filter: blur(5px);
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 250ms ease;
-  }
-
-  .modal-backdrop.active {
-    opacity: 1;
-    pointer-events: auto;
-  }
-
-  /* Scrollbar hiding */
-  .preview-card.modal-active::-webkit-scrollbar,
-  .preview-card.modal-active .full-details::-webkit-scrollbar {
-    display: none;
-  }
-
-  body.modal-open {
-    overflow: hidden !important;
-  }
-  
-  /* pesticide css */
-  .pest {
-    border: 2px solid red;
-  }
-
-  .pest-or {
-    border: 2px solid orange;
-  }
-
-  .pest-bl {
-    border: 3px solid blue;
+    background: rgba(96, 165, 250, 0.25);
   }
 }
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+#autocompleteDropdown button:hover,
+#autocompleteDropdown button:focus {
+  background: rgba(59, 130, 246, 0.14);
+}
+
+/* previewCountry card css */
+.preview-card {
+  transform: scale(1);
+  transition: all 250ms ease;
+}
+
+.preview-card.modal-active {
+  /* Mobile-first base */
+  position: fixed !important;
+  inset: 10% !important;
+  margin: auto !important;
+  min-width: 320px !important;
+  max-width: 90vw !important;
+  max-height: 85vh !important;
+  z-index: 50 !important;
+  overflow-y: auto !important;
+  transform: scale(1.02) !important;
+  box-shadow: 0 30px 50px rgba(0, 0, 0, 0.35) !important;
+  border-radius: 2rem !important;
+}
+
+@media (min-width: 640px) {
+  .preview-card.modal-active {
+    max-width: 70vw !important;
+    max-height: 90vh !important;
+  }
+}
+
+.preview-card.modal-active .preview-content {
+  opacity: 0;
+  transform: translateY(-8px);
+  transition: all 250ms ease;
+  display: none !important;
+}
+
+.preview-card.modal-active .full-details {
+  opacity: 1;
+  max-height: 3000px;
+  transition: opacity 300ms ease;
+}
+
+.full-details {
+  opacity: 0;
+  max-height: 0;
+  overflow: hidden;
+  transition: opacity 220ms ease, max-height 220ms ease;
+}
+
+/* Backdrop */
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 30;
+  background: rgba(15, 23, 42, 0.45);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 250ms ease;
+}
+
+.modal-backdrop.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* Scrollbar hiding */
+.preview-card.modal-active::-webkit-scrollbar,
+.preview-card.modal-active .full-details::-webkit-scrollbar {
+  display: none;
+}
+
+body.modal-open {
+  overflow: hidden !important;
+}
+
+/* pesticide css */
+.pest {
+  border: 2px solid red;
+}
+
+.pest-or {
+  border: 2px solid orange;
+}
+
+.pest-bl {
+  border: 3px solid blue;
+}
