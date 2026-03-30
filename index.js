@@ -20,7 +20,7 @@ app.get("/", (req, res) => {
 const handleResponse = (res, responseObj) => {
   const data = Array.isArray(responseObj.data) 
     ? responseObj.data 
-    : [responseObj.data];   // ← wrap single object in array
+    : [responseObj.data];   // wrap single object in array
 
   res.render("index", { content: data });
 };
@@ -38,7 +38,7 @@ const handleError = (res, error) => {
 // TODOs
 // - ✅ Handle edge cases (e.g., empty input(already handled by FE required attr).
 // - In V2: typing NGA, RSA, USA, UK, england and similar cases instead of Nigeria, South Africa, United States)
-// - In V2: use selected filter in frontend form to reroute from /name endpoint to other endpoints 
+// - ✅In V2: use selected filter in frontend form to reroute from /name endpoint to other endpoints 
 // (e.g., /capital, /currency, /lang etc) for more specific search results. This will require some 
 // changes to the FE form (e.g., adding a dropdown for filter selection) and the BE route handler 
 // (e.g., using a switch case to determine which endpoint to call based on the selected filter). 
@@ -53,15 +53,13 @@ app.post("/search", async (req, res) => {
 
   let endpoint = '';
   switch (searchType) {
-    // TODO: handle single output cases first
-    // TODO: handle multiple output cases first
-    case 'name':     endpoint = `/name/${encodeURIComponent(query)}?fullText=true&`; break; /* single */
-    case 'alpha':    endpoint = `/alpha/${query.toUpperCase()}?`; break; /* single */
-    case 'capital':  endpoint = `/capital/${encodeURIComponent(query)}?`; break; /* single/multiple(incomplete input capital) */
-    case 'region': endpoint = `/region/${encodeURIComponent(query)}?`; break; /* multiple */
-    case 'currency': endpoint = `/currency/${encodeURIComponent(query)}?`; break; /* single/multiple */
-    case 'language': endpoint = `/lang/${encodeURIComponent(query)}?`; break; /* single/multiple */
-    case 'demonym':  endpoint = `/demonym/${encodeURIComponent(query)}?`; break; /* single/multiple */
+    case 'name':     endpoint = `/name/${encodeURIComponent(query)}?fullText=true&`; break; 
+    case 'alpha':    endpoint = `/alpha/${query.toUpperCase()}?`; break; 
+    case 'capital':  endpoint = `/capital/${encodeURIComponent(query)}?`; break;
+    case 'region': endpoint = `/region/${encodeURIComponent(query)}?`; break; 
+    case 'currency': endpoint = `/currency/${encodeURIComponent(query)}?`; break;
+    case 'language': endpoint = `/lang/${encodeURIComponent(query)}?`; break;
+    case 'demonym':  endpoint = `/demonym/${encodeURIComponent(query)}?`; break;
     default: 
       endpoint = `/name/${encodeURIComponent(query)}?fullText=true&`;
       return;
