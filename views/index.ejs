@@ -6,6 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Country Info app</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
+  <link rel="stylesheet" type='text/css' href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css" />
   <link rel="stylesheet" href="/css/output.css">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><text y='14' font-size='16'>🌍</text></svg>">
 </head>
@@ -99,7 +100,7 @@
   </div>
 
   <!-- Main content area (for results) -->
-  <div id="mainContent" role="main" class="px-4 py-8" aria-live="polite" aria-label="Search results area">
+  <div id="mainContent" role="main" class="px-4 py-8 mb-8" aria-live="polite" aria-label="Search results area">
     <!-- Results will go here -->
     <% if (locals.content) { %>
       <% 
@@ -136,6 +137,11 @@
       %>
     <% } %>
   </div>
+
+  <!-- Footer (only on successful results - array of countries, not error string) -->
+  <% if (locals.content && typeof content !== 'string') { %>
+    <%- include('partials/footer') %>
+  <% } %>
 
   <script src="/js/main.js" defer></script>
 </body>
