@@ -1,10 +1,6 @@
 // File for JS related to modals and other interactive elements on the page
 
-// TODOs
-// - Add logic to display the footer.ejs when the search results is being displayed, and hiding it when the search results is hidden.
-
 // input field dropdown + autocomplete + modal behavior
-
 document.addEventListener('DOMContentLoaded', () => {
   const searchInput = document.getElementById('searchInput');
   const searchType = document.getElementById('searchType');

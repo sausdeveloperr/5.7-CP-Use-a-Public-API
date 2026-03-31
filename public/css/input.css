@@ -116,8 +116,8 @@ select#searchType {
   inset: 10% !important;
   margin: auto !important;
   min-width: 320px !important;
-  max-width: 90vw !important;
-  max-height: 85vh !important;
+  max-width: 95vw !important;
+  max-height: 90vh !important;
   z-index: 50 !important;
   overflow-y: auto !important;
   transform: scale(1.02) !important;
@@ -170,7 +170,7 @@ select#searchType {
   pointer-events: auto;
 }
 
-/* Scrollbar hiding */
+/* previewCountry scrollbar hiding */
 .preview-card.modal-active::-webkit-scrollbar,
 .preview-card.modal-active .full-details::-webkit-scrollbar {
   display: none;
