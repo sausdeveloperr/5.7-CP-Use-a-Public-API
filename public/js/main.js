@@ -135,7 +135,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // Modal code (same as before)
+  // Modal code 
   const backdrop = document.createElement('div');
   backdrop.className = 'modal-backdrop';
   document.body.appendChild(backdrop);

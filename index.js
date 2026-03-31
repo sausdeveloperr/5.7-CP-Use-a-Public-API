@@ -59,9 +59,7 @@ app.post("/search", async (req, res) => {
   }
 
   try {
-    console.log(`${API_URL}${endpoint}${endpointFields}`);
     const responseObj = await axios.get(`${API_URL}${endpoint}${endpointFields}`);
-    
     handleResponse(res, responseObj);
   } catch (error) {
     handleError(res, error);
