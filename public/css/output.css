@@ -885,10 +885,6 @@ video {
   border-width: 2px;
 }
 
-.border-4{
-  border-width: 4px;
-}
-
 .border-b{
   border-bottom-width: 1px;
 }
@@ -1056,11 +1052,6 @@ video {
 .text-3xl{
   font-size: 1.875rem;
   line-height: 2.25rem;
-}
-
-.text-4xl{
-  font-size: 2.25rem;
-  line-height: 2.5rem;
 }
 
 .text-5xl{
@@ -1239,6 +1230,7 @@ video {
   --color-bg: #ffffff;
   --color-text: #000000;
   --color-accent: #3b82f6;
+  --color-accent-teal: #2ab5b0;
   --color-border: #e5e7eb;
 }
 
@@ -1728,11 +1720,6 @@ body.modal-open {
   .md\:text-4xl{
     font-size: 2.25rem;
     line-height: 2.5rem;
-  }
-
-  .md\:text-5xl{
-    font-size: 3rem;
-    line-height: 1;
   }
 
   .md\:text-6xl{

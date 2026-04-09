@@ -101,12 +101,8 @@ Open: `http://localhost:3000`
 
 ---
 
-## ✅ incoming improvements in V2.0 and 2.1
+## ✅ incoming feature in V2.1
 
-- Add options for search by capital / currency / language / region et al
-- Support multiple results (render multiple cards)
-- Add full support for secondary API that renders World news for "What's happening..." button
-- Add manual dark-mode toggle (override `prefers-color-scheme`)
-- Add rate limiting / request throttling
+- Full support for secondary API that renders World news for "What's happening..." button
 
 ---
