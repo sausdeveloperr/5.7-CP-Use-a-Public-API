@@ -2,7 +2,7 @@ import express from "express";
 import axios from "axios"; 
 
 const app = express();
-const port = 3000; 
+const port = process.env.PORT || 3000; 
 const API_URL = "https://restcountries.com/v3.1";
 const endpointFields = "fields=name,capital,cca3,region,subregion,population,car,timezones,currencies,languages,flags,demonyms,startOfWeek,unMember,idd,landlocked";
 
